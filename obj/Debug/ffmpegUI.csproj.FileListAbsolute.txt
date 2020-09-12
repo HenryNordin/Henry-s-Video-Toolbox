@@ -1,0 +1,13 @@
+C:\Users\Henry\source\repos\ffmpegUI\ffmpegUI\bin\Debug\ffmpegUI.exe
+C:\Users\Henry\source\repos\ffmpegUI\ffmpegUI\bin\Debug\ffmpegUI.pdb
+C:\Users\Henry\source\repos\ffmpegUI\ffmpegUI\obj\Debug\ffmpegUI.Form1.resources
+C:\Users\Henry\source\repos\ffmpegUI\ffmpegUI\obj\Debug\ffmpegUI.Properties.Resources.resources
+C:\Users\Henry\source\repos\ffmpegUI\ffmpegUI\obj\Debug\ffmpegUI.csproj.GenerateResource.cache
+C:\Users\Henry\source\repos\ffmpegUI\ffmpegUI\obj\Debug\ffmpegUI.csproj.CoreCompileInputs.cache
+C:\Users\Henry\source\repos\ffmpegUI\ffmpegUI\obj\Debug\ffmpegUI.exe
+C:\Users\Henry\source\repos\ffmpegUI\ffmpegUI\obj\Debug\ffmpegUI.pdb
+C:\Users\Henry\source\repos\ffmpegUI\ffmpegUI\bin\Debug\ffmpegUI.exe.manifest
+C:\Users\Henry\source\repos\ffmpegUI\ffmpegUI\bin\Debug\ffmpegUI.application
+C:\Users\Henry\source\repos\ffmpegUI\ffmpegUI\obj\Debug\ffmpegUI.csprojAssemblyReference.cache
+C:\Users\Henry\source\repos\ffmpegUI\ffmpegUI\obj\Debug\ffmpegUI.exe.manifest
+C:\Users\Henry\source\repos\ffmpegUI\ffmpegUI\obj\Debug\ffmpegUI.application
