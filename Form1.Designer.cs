@@ -30,7 +30,6 @@
         {
             this.fileselectBTN = new System.Windows.Forms.Button();
             this.fileTBX = new System.Windows.Forms.TextBox();
-            this.btnDEBUG = new System.Windows.Forms.Button();
             this.resolutionCB1 = new System.Windows.Forms.ComboBox();
             this.resolutionLBL = new System.Windows.Forms.Label();
             this.ResCheckB = new System.Windows.Forms.CheckBox();
@@ -58,14 +57,25 @@
             this.ProfileCheckB = new System.Windows.Forms.CheckBox();
             this.ProfileLBL = new System.Windows.Forms.Label();
             this.ProfileCB1 = new System.Windows.Forms.ComboBox();
-            this.OutputNameTBX = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.DestinationBTN = new System.Windows.Forms.Button();
-            this.FileNameOutputTBX = new System.Windows.Forms.TextBox();
+            this.VencodCB1 = new System.Windows.Forms.ComboBox();
+            this.PresetSelectCB1 = new System.Windows.Forms.ComboBox();
+            this.BtnChoosePreset = new System.Windows.Forms.Button();
             this.FileEXTCB1 = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.PS2PALPRESETBTN = new System.Windows.Forms.Button();
+            this.FileNameOutputTBX = new System.Windows.Forms.TextBox();
+            this.DestinationBTN = new System.Windows.Forms.Button();
+            this.OutputNameTBX = new System.Windows.Forms.TextBox();
+            this.btnDEBUG = new System.Windows.Forms.Button();
+            this.LevelCheckB = new System.Windows.Forms.CheckBox();
+            this.LevelLBL = new System.Windows.Forms.Label();
+            this.LevelCB1 = new System.Windows.Forms.ComboBox();
+            this.AudioBitrateCheckB = new System.Windows.Forms.CheckBox();
+            this.AudioBitrateLBL = new System.Windows.Forms.Label();
+            this.AudioBitrateCB1 = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // fileselectBTN
@@ -84,22 +94,10 @@
             this.fileTBX.Name = "fileTBX";
             this.fileTBX.Size = new System.Drawing.Size(332, 20);
             this.fileTBX.TabIndex = 1;
-            this.fileTBX.Text = "B:\\Videos\\Elgato\\EGC_Library\\My Great Game - My Great Capture - 2020-09-07 15-11-" +
-    "29\\Recording_2020-09-07_15-11-29_0004.ts";
+            this.fileTBX.Text = "C:\\Users\\hn0201\\Downloads\\COSTA RICA IN 1080P 60FPS.mp4";
             this.fileTBX.TextChanged += new System.EventHandler(this.fileTBX_TextChanged);
             this.fileTBX.DragDrop += new System.Windows.Forms.DragEventHandler(this.fileTBX_DragDrop);
             this.fileTBX.DragEnter += new System.Windows.Forms.DragEventHandler(this.fileTBX_DragEnter);
-            // 
-            // btnDEBUG
-            // 
-            this.btnDEBUG.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDEBUG.Location = new System.Drawing.Point(374, 374);
-            this.btnDEBUG.Name = "btnDEBUG";
-            this.btnDEBUG.Size = new System.Drawing.Size(277, 64);
-            this.btnDEBUG.TabIndex = 2;
-            this.btnDEBUG.Text = "Export Video File";
-            this.btnDEBUG.UseVisualStyleBackColor = true;
-            this.btnDEBUG.Click += new System.EventHandler(this.btnDEBUG_Click);
             // 
             // resolutionCB1
             // 
@@ -366,7 +364,7 @@
             // BufsizeLBL
             // 
             this.BufsizeLBL.AutoSize = true;
-            this.BufsizeLBL.Location = new System.Drawing.Point(125, 118);
+            this.BufsizeLBL.Location = new System.Drawing.Point(13, 160);
             this.BufsizeLBL.Name = "BufsizeLBL";
             this.BufsizeLBL.Size = new System.Drawing.Size(43, 13);
             this.BufsizeLBL.TabIndex = 24;
@@ -379,7 +377,7 @@
             "10M",
             "15M",
             "20M"});
-            this.BufSizeCB1.Location = new System.Drawing.Point(147, 133);
+            this.BufSizeCB1.Location = new System.Drawing.Point(35, 175);
             this.BufSizeCB1.Name = "BufSizeCB1";
             this.BufSizeCB1.Size = new System.Drawing.Size(82, 21);
             this.BufSizeCB1.TabIndex = 23;
@@ -387,7 +385,7 @@
             // BufsizeCheckB
             // 
             this.BufsizeCheckB.AutoSize = true;
-            this.BufsizeCheckB.Location = new System.Drawing.Point(128, 136);
+            this.BufsizeCheckB.Location = new System.Drawing.Point(16, 178);
             this.BufsizeCheckB.Name = "BufsizeCheckB";
             this.BufsizeCheckB.Size = new System.Drawing.Size(15, 14);
             this.BufsizeCheckB.TabIndex = 25;
@@ -427,66 +425,62 @@
             // 
             this.ProfileCB1.FormattingEnabled = true;
             this.ProfileCB1.Items.AddRange(new object[] {
-            "high"});
+            "high",
+            "main",
+            "baseline"});
             this.ProfileCB1.Location = new System.Drawing.Point(138, 359);
             this.ProfileCB1.Name = "ProfileCB1";
             this.ProfileCB1.Size = new System.Drawing.Size(82, 21);
             this.ProfileCB1.TabIndex = 27;
             this.ProfileCB1.Text = "high";
             // 
-            // OutputNameTBX
-            // 
-            this.OutputNameTBX.Location = new System.Drawing.Point(374, 326);
-            this.OutputNameTBX.Name = "OutputNameTBX";
-            this.OutputNameTBX.Size = new System.Drawing.Size(191, 20);
-            this.OutputNameTBX.TabIndex = 30;
-            this.OutputNameTBX.Text = "B:\\ffmpeg\\EXPORT";
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(566, 95);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(47, 13);
+            this.label2.Size = new System.Drawing.Size(77, 13);
             this.label2.TabIndex = 32;
-            this.label2.Text = "Encoder";
+            this.label2.Text = "Video Encoder";
             // 
-            // comboBox1
+            // VencodCB1
             // 
-            this.comboBox1.Enabled = false;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "libx264"});
-            this.comboBox1.Location = new System.Drawing.Point(569, 110);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(61, 21);
-            this.comboBox1.TabIndex = 31;
-            this.comboBox1.Text = "libx264";
+            this.VencodCB1.FormattingEnabled = true;
+            this.VencodCB1.Items.AddRange(new object[] {
+            "libx264",
+            "libx265"});
+            this.VencodCB1.Location = new System.Drawing.Point(569, 110);
+            this.VencodCB1.Name = "VencodCB1";
+            this.VencodCB1.Size = new System.Drawing.Size(61, 21);
+            this.VencodCB1.TabIndex = 31;
+            this.VencodCB1.Text = "libx264";
             // 
-            // DestinationBTN
+            // PresetSelectCB1
             // 
-            this.DestinationBTN.Location = new System.Drawing.Point(569, 325);
-            this.DestinationBTN.Name = "DestinationBTN";
-            this.DestinationBTN.Size = new System.Drawing.Size(80, 20);
-            this.DestinationBTN.TabIndex = 33;
-            this.DestinationBTN.Text = "Save location";
-            this.DestinationBTN.UseVisualStyleBackColor = true;
-            this.DestinationBTN.Click += new System.EventHandler(this.DestinationBTN_Click);
+            this.PresetSelectCB1.FormattingEnabled = true;
+            this.PresetSelectCB1.Location = new System.Drawing.Point(377, 242);
+            this.PresetSelectCB1.Name = "PresetSelectCB1";
+            this.PresetSelectCB1.Size = new System.Drawing.Size(148, 21);
+            this.PresetSelectCB1.TabIndex = 38;
+            this.PresetSelectCB1.DropDown += new System.EventHandler(this.PresetSelectCB1_DropDown);
             // 
-            // FileNameOutputTBX
+            // BtnChoosePreset
             // 
-            this.FileNameOutputTBX.Location = new System.Drawing.Point(440, 352);
-            this.FileNameOutputTBX.Name = "FileNameOutputTBX";
-            this.FileNameOutputTBX.Size = new System.Drawing.Size(125, 20);
-            this.FileNameOutputTBX.TabIndex = 34;
-            this.FileNameOutputTBX.Text = "Export";
+            this.BtnChoosePreset.Location = new System.Drawing.Point(531, 240);
+            this.BtnChoosePreset.Name = "BtnChoosePreset";
+            this.BtnChoosePreset.Size = new System.Drawing.Size(99, 23);
+            this.BtnChoosePreset.TabIndex = 39;
+            this.BtnChoosePreset.Text = "Use preset";
+            this.BtnChoosePreset.UseVisualStyleBackColor = true;
+            this.BtnChoosePreset.Click += new System.EventHandler(this.BtnChoosePreset_Click);
             // 
             // FileEXTCB1
             // 
             this.FileEXTCB1.FormattingEnabled = true;
             this.FileEXTCB1.Items.AddRange(new object[] {
-            ".mp4"});
-            this.FileEXTCB1.Location = new System.Drawing.Point(569, 351);
+            ".mp4",
+            ".mp3"});
+            this.FileEXTCB1.Location = new System.Drawing.Point(569, 339);
             this.FileEXTCB1.Name = "FileEXTCB1";
             this.FileEXTCB1.Size = new System.Drawing.Size(80, 21);
             this.FileEXTCB1.TabIndex = 35;
@@ -496,35 +490,181 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(371, 353);
+            this.label3.Location = new System.Drawing.Point(371, 341);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(67, 16);
             this.label3.TabIndex = 36;
             this.label3.Text = "File name";
             // 
-            // PS2PALPRESETBTN
+            // FileNameOutputTBX
             // 
-            this.PS2PALPRESETBTN.Location = new System.Drawing.Point(550, 173);
-            this.PS2PALPRESETBTN.Name = "PS2PALPRESETBTN";
-            this.PS2PALPRESETBTN.Size = new System.Drawing.Size(99, 23);
-            this.PS2PALPRESETBTN.TabIndex = 37;
-            this.PS2PALPRESETBTN.Text = "PS2 PAL Preset";
-            this.PS2PALPRESETBTN.UseVisualStyleBackColor = true;
-            this.PS2PALPRESETBTN.Click += new System.EventHandler(this.PS2PALPRESETBTN_Click);
+            this.FileNameOutputTBX.Location = new System.Drawing.Point(440, 340);
+            this.FileNameOutputTBX.Name = "FileNameOutputTBX";
+            this.FileNameOutputTBX.Size = new System.Drawing.Size(125, 20);
+            this.FileNameOutputTBX.TabIndex = 34;
+            this.FileNameOutputTBX.Text = "Export";
+            // 
+            // DestinationBTN
+            // 
+            this.DestinationBTN.Location = new System.Drawing.Point(569, 313);
+            this.DestinationBTN.Name = "DestinationBTN";
+            this.DestinationBTN.Size = new System.Drawing.Size(80, 20);
+            this.DestinationBTN.TabIndex = 33;
+            this.DestinationBTN.Text = "Save location";
+            this.DestinationBTN.UseVisualStyleBackColor = true;
+            this.DestinationBTN.Click += new System.EventHandler(this.DestinationBTN_Click);
+            // 
+            // OutputNameTBX
+            // 
+            this.OutputNameTBX.Location = new System.Drawing.Point(374, 314);
+            this.OutputNameTBX.Name = "OutputNameTBX";
+            this.OutputNameTBX.Size = new System.Drawing.Size(191, 20);
+            this.OutputNameTBX.TabIndex = 30;
+            this.OutputNameTBX.Text = "C:\\Users\\hn0201\\Desktop";
+            // 
+            // btnDEBUG
+            // 
+            this.btnDEBUG.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDEBUG.Location = new System.Drawing.Point(374, 362);
+            this.btnDEBUG.Name = "btnDEBUG";
+            this.btnDEBUG.Size = new System.Drawing.Size(277, 64);
+            this.btnDEBUG.TabIndex = 2;
+            this.btnDEBUG.Text = "Export Video File";
+            this.btnDEBUG.UseVisualStyleBackColor = true;
+            this.btnDEBUG.Click += new System.EventHandler(this.btnDEBUG_Click);
+            // 
+            // LevelCheckB
+            // 
+            this.LevelCheckB.AutoSize = true;
+            this.LevelCheckB.Location = new System.Drawing.Point(233, 362);
+            this.LevelCheckB.Name = "LevelCheckB";
+            this.LevelCheckB.Size = new System.Drawing.Size(15, 14);
+            this.LevelCheckB.TabIndex = 43;
+            this.LevelCheckB.UseVisualStyleBackColor = true;
+            this.LevelCheckB.CheckedChanged += new System.EventHandler(this.LevelCheckB_CheckedChanged);
+            // 
+            // LevelLBL
+            // 
+            this.LevelLBL.AutoSize = true;
+            this.LevelLBL.Location = new System.Drawing.Point(230, 344);
+            this.LevelLBL.Name = "LevelLBL";
+            this.LevelLBL.Size = new System.Drawing.Size(33, 13);
+            this.LevelLBL.TabIndex = 42;
+            this.LevelLBL.Text = "Level";
+            // 
+            // LevelCB1
+            // 
+            this.LevelCB1.FormattingEnabled = true;
+            this.LevelCB1.Items.AddRange(new object[] {
+            "5.1",
+            "5",
+            "4.2",
+            "4.1",
+            "4",
+            "3.2",
+            "3.1",
+            "3",
+            "2.2",
+            "2.1",
+            "2",
+            "1.3",
+            "1.2",
+            "1.1",
+            "1b",
+            "1"});
+            this.LevelCB1.Location = new System.Drawing.Point(252, 359);
+            this.LevelCB1.Name = "LevelCB1";
+            this.LevelCB1.Size = new System.Drawing.Size(82, 21);
+            this.LevelCB1.TabIndex = 41;
+            this.LevelCB1.Text = "4.2";
+            // 
+            // AudioBitrateCheckB
+            // 
+            this.AudioBitrateCheckB.AutoSize = true;
+            this.AudioBitrateCheckB.Location = new System.Drawing.Point(16, 285);
+            this.AudioBitrateCheckB.Name = "AudioBitrateCheckB";
+            this.AudioBitrateCheckB.Size = new System.Drawing.Size(15, 14);
+            this.AudioBitrateCheckB.TabIndex = 46;
+            this.AudioBitrateCheckB.UseVisualStyleBackColor = true;
+            this.AudioBitrateCheckB.CheckedChanged += new System.EventHandler(this.AudioBitrateCheckB_CheckedChanged);
+            // 
+            // AudioBitrateLBL
+            // 
+            this.AudioBitrateLBL.AutoSize = true;
+            this.AudioBitrateLBL.Location = new System.Drawing.Point(13, 267);
+            this.AudioBitrateLBL.Name = "AudioBitrateLBL";
+            this.AudioBitrateLBL.Size = new System.Drawing.Size(66, 13);
+            this.AudioBitrateLBL.TabIndex = 45;
+            this.AudioBitrateLBL.Text = "Audio bitrate";
+            // 
+            // AudioBitrateCB1
+            // 
+            this.AudioBitrateCB1.FormattingEnabled = true;
+            this.AudioBitrateCB1.Items.AddRange(new object[] {
+            "64",
+            "96",
+            "112",
+            "128",
+            "160",
+            "192",
+            "256",
+            "320"});
+            this.AudioBitrateCB1.Location = new System.Drawing.Point(35, 282);
+            this.AudioBitrateCB1.Name = "AudioBitrateCB1";
+            this.AudioBitrateCB1.Size = new System.Drawing.Size(42, 21);
+            this.AudioBitrateCB1.TabIndex = 44;
+            this.AudioBitrateCB1.Text = "128";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(78, 285);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(30, 13);
+            this.label4.TabIndex = 47;
+            this.label4.Text = "kbps";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(566, 137);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(77, 13);
+            this.label5.TabIndex = 49;
+            this.label5.Text = "Audio Encoder";
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(569, 152);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(61, 21);
+            this.comboBox1.TabIndex = 48;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(663, 450);
-            this.Controls.Add(this.PS2PALPRESETBTN);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.FileEXTCB1);
-            this.Controls.Add(this.FileNameOutputTBX);
-            this.Controls.Add(this.DestinationBTN);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.AudioBitrateCheckB);
+            this.Controls.Add(this.AudioBitrateLBL);
+            this.Controls.Add(this.AudioBitrateCB1);
+            this.Controls.Add(this.LevelCheckB);
+            this.Controls.Add(this.LevelLBL);
+            this.Controls.Add(this.LevelCB1);
+            this.Controls.Add(this.btnDEBUG);
             this.Controls.Add(this.OutputNameTBX);
+            this.Controls.Add(this.DestinationBTN);
+            this.Controls.Add(this.FileNameOutputTBX);
+            this.Controls.Add(this.BtnChoosePreset);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.PresetSelectCB1);
+            this.Controls.Add(this.FileEXTCB1);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.VencodCB1);
             this.Controls.Add(this.ProfileCheckB);
             this.Controls.Add(this.ProfileLBL);
             this.Controls.Add(this.ProfileCB1);
@@ -552,7 +692,6 @@
             this.Controls.Add(this.ResCheckB);
             this.Controls.Add(this.resolutionLBL);
             this.Controls.Add(this.resolutionCB1);
-            this.Controls.Add(this.btnDEBUG);
             this.Controls.Add(this.fileTBX);
             this.Controls.Add(this.fileselectBTN);
             this.Name = "Form1";
@@ -567,7 +706,6 @@
 
         private System.Windows.Forms.Button fileselectBTN;
         private System.Windows.Forms.TextBox fileTBX;
-        private System.Windows.Forms.Button btnDEBUG;
         private System.Windows.Forms.ComboBox resolutionCB1;
         private System.Windows.Forms.Label resolutionLBL;
         private System.Windows.Forms.CheckBox ResCheckB;
@@ -595,14 +733,25 @@
         private System.Windows.Forms.CheckBox ProfileCheckB;
         private System.Windows.Forms.Label ProfileLBL;
         private System.Windows.Forms.ComboBox ProfileCB1;
-        private System.Windows.Forms.TextBox OutputNameTBX;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.Button DestinationBTN;
-        private System.Windows.Forms.TextBox FileNameOutputTBX;
+        private System.Windows.Forms.ComboBox VencodCB1;
+        private System.Windows.Forms.ComboBox PresetSelectCB1;
+        private System.Windows.Forms.Button BtnChoosePreset;
         private System.Windows.Forms.ComboBox FileEXTCB1;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button PS2PALPRESETBTN;
+        private System.Windows.Forms.TextBox FileNameOutputTBX;
+        private System.Windows.Forms.Button DestinationBTN;
+        private System.Windows.Forms.TextBox OutputNameTBX;
+        private System.Windows.Forms.Button btnDEBUG;
+        private System.Windows.Forms.CheckBox LevelCheckB;
+        private System.Windows.Forms.Label LevelLBL;
+        private System.Windows.Forms.ComboBox LevelCB1;
+        private System.Windows.Forms.CheckBox AudioBitrateCheckB;
+        private System.Windows.Forms.Label AudioBitrateLBL;
+        private System.Windows.Forms.ComboBox AudioBitrateCB1;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }
 

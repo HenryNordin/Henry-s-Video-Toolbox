@@ -1,0 +1,12 @@
+Resolution=720x576
+Deinterlace=yadif=1
+AspectRatio=4:3 
+CRF=1 
+Maxrate=15M
+BufSize=15M
+FPS=15
+CRF=1
+SpeedPreset=superfast
+AudioBitrate=128
+Profile=high
+Level=4.2

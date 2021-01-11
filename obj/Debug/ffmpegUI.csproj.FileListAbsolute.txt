@@ -11,3 +11,16 @@ C:\Users\Henry\source\repos\ffmpegUI\ffmpegUI\bin\Debug\ffmpegUI.application
 C:\Users\Henry\source\repos\ffmpegUI\ffmpegUI\obj\Debug\ffmpegUI.csprojAssemblyReference.cache
 C:\Users\Henry\source\repos\ffmpegUI\ffmpegUI\obj\Debug\ffmpegUI.exe.manifest
 C:\Users\Henry\source\repos\ffmpegUI\ffmpegUI\obj\Debug\ffmpegUI.application
+C:\Users\hn0201\Documents\GitHub\FFmpegUI\bin\Debug\ffmpegUI.exe.manifest
+C:\Users\hn0201\Documents\GitHub\FFmpegUI\bin\Debug\ffmpegUI.application
+C:\Users\hn0201\Documents\GitHub\FFmpegUI\bin\Debug\ffmpegUI.exe
+C:\Users\hn0201\Documents\GitHub\FFmpegUI\bin\Debug\ffmpegUI.pdb
+C:\Users\hn0201\Documents\GitHub\FFmpegUI\obj\Debug\ffmpegUI.csprojAssemblyReference.cache
+C:\Users\hn0201\Documents\GitHub\FFmpegUI\obj\Debug\ffmpegUI.Form1.resources
+C:\Users\hn0201\Documents\GitHub\FFmpegUI\obj\Debug\ffmpegUI.Properties.Resources.resources
+C:\Users\hn0201\Documents\GitHub\FFmpegUI\obj\Debug\ffmpegUI.csproj.GenerateResource.cache
+C:\Users\hn0201\Documents\GitHub\FFmpegUI\obj\Debug\ffmpegUI.csproj.CoreCompileInputs.cache
+C:\Users\hn0201\Documents\GitHub\FFmpegUI\obj\Debug\ffmpegUI.exe.manifest
+C:\Users\hn0201\Documents\GitHub\FFmpegUI\obj\Debug\ffmpegUI.application
+C:\Users\hn0201\Documents\GitHub\FFmpegUI\obj\Debug\ffmpegUI.exe
+C:\Users\hn0201\Documents\GitHub\FFmpegUI\obj\Debug\ffmpegUI.pdb
