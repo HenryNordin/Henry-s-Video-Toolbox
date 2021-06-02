@@ -25,19 +25,15 @@ namespace ffmpegUI
             InitializeComponent();
         }
 
-        private void fileTBX_TextChanged(object sender, EventArgs e)
-        {
-
-        }
+        private void fileTBX_TextChanged(object sender, EventArgs e){}
         private void fileselectBTN_Click(object sender, EventArgs e)
         {
-            OpenFileDialog openFileDialog1 = new OpenFileDialog
+            OpenFileDialog openFileDialog1 = new OpenFileDialog //Välja input fil
             {
                 InitialDirectory = @"B:\Videos",
                 Title = "Browse Video Files",
                 CheckFileExists = true,
                 CheckPathExists = true,
-
                 DefaultExt = "txt",
                 Filter = "Video files (*.*)|*.*",
                 FilterIndex = 2,
@@ -47,26 +43,26 @@ namespace ffmpegUI
                 ShowReadOnly = true
             };
 
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            if (openFileDialog1.ShowDialog() == DialogResult.OK) //Skickar filvägen till input fileTBX rutan
             {
                 fileTBX.Text = openFileDialog1.FileName;
             }
         }
-
-        private void btnDEBUG_Click(object sender, EventArgs e)
+        public double Progress { get; set; }
+        private void btnDEBUG_Click(object sender, EventArgs e) //Här läses alla textrutor, comborutor etc in och uppfattas
         {
-            string ExportName = OutputNameTBX.Text + "\u005c" + FileNameOutputTBX.Text + FileEXTCB1.Text;
-            string AspectRatio = string.Empty;
-            if (AspectRatioCB1.Enabled == true)
+            string ExportName = OutputNameTBX.Text + "\u005c" + FileNameOutputTBX.Text + FileEXTCB1.Text; //Läser in vart filen ska och vad den ska heta
+            string AspectRatio = string.Empty; //Aspect ratio, form på videon
+            if (AspectRatioCB1.Enabled == true) //Om aktiverad så kollar den vad för värde som skrivits in
             {
                 AspectRatio = "-aspect " + AspectRatioCB1.Text + " ";
             }
-            else
+            else //Annars gör inget
             {
                 AspectRatio = "";
             }
 
-            string vf = string.Empty;
+            string vf = string.Empty; //Samma som tidigare
             if ((resolutionCB1.Enabled || deinterlaceCB1.Enabled == true))
             {
                 vf = "-vf ";
@@ -186,32 +182,50 @@ namespace ffmpegUI
                 AudioBitrate = "";
             }
 
+            string CropNPos = string.Empty;       //WORK IN PROGRESS//https://video.stackexchange.com/questions/4563/how-can-i-crop-a-video-with-ffmpeg //
+            if (CropCheckB.Checked == true)
+            {
+                //Normalt ffmpeg kommand "-filter:v \u0022 crop = 80:60:200:100 \u0022 "
+                CropNPos = "-filter:v \u0022 crop = " + CropXSizeTBX.Text + ":" + CropYSizeTBX.Text + ":" + CropXLocationTBX.Text + ":" + CropYLocationTBX.Text + " \u0022"; //kollar av vart videon ska cropas och hur mycket
+            }
+            else
+            {
+                CropNPos = "";
+            }
 
 
-            string path = @"";
-            string ffmpegPath = System.IO.Path.Combine(path, "ffmpeg.exe");
-            string ffmpegParams = "-i \u0022" + @fileTBX.Text + "\u0022 " + AspectRatio + vf + Deinterlace + Resolution + Vcodec + Preset + Profile + Level + crf + Maxrate + Bufsize + FPS + AudioBitrate + "-movflags +faststart -y " + "\u0022"  + ExportName + "\u0022 "; //"-strict experimental -c:a aac -b:a 96k 
-            var ffmpeg = new System.Diagnostics.Process();
-            ffmpeg.StartInfo.FileName = "cmd.exe";
-            ffmpeg.StartInfo.Arguments = "/k " + ffmpegPath + " " + ffmpegParams;
-            ffmpeg.Start();
+            string path = @""; //Starta i program mappen
+            string ffmpegPath = System.IO.Path.Combine(path, "ffmpeg.exe"); //Programmer som ska öppnas och nedan finns paramerterna vilket säger till om vad som ska göras när programet går igång.
+            string ffmpegParams = "-i \u0022" + @fileTBX.Text + "\u0022 " + AspectRatio + vf + Deinterlace + Resolution + Vcodec + Preset + Profile + Level + crf + Maxrate + Bufsize + FPS + AudioBitrate + CropNPos +  " -movflags +faststart -y " + "\u0022"  + ExportName + "\u0022 "; //"-strict experimental -c:a aac -b:a 96k 
+            var ffmpeg = new System.Diagnostics.Process(); //Ny process
+            ffmpeg.StartInfo.FileName = "cmd.exe"; //Väljer Kommandotolken som ska startas
+            ffmpeg.StartInfo.Arguments = "/k " + ffmpegPath + " " + ffmpegParams; //Start argument
+            ffmpeg.Start(); //Startar CMD med alla information åvan
         }
 
         private void fileTBX_DragDrop(object sender, DragEventArgs e)
         {
-
+            string[] filePaths = (string[])e.Data.GetData(DataFormats.FileDrop, false);
+            fileTBX.Text = (String.Concat(filePaths));
         }
 
-        private void fileTBX_DragEnter(object sender, DragEventArgs e)
+        private void fileTBX_DragEnter(object sender, DragEventArgs e)  //Gör så att man kan dra in en fil i input textboxen
         {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                e.Effect = DragDropEffects.Copy;
 
+            }
+            else
+            {
+                e.Effect = DragDropEffects.None;
+            }
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        void Clear()
         {
             PresetSelectCB1.Enabled = true;
             BtnChoosePreset.Enabled = true;
-
             resolutionCB1.Enabled = false;
             AspectRatioCB1.Enabled = false;
             deinterlaceCB1.Enabled = false;
@@ -225,14 +239,34 @@ namespace ffmpegUI
             ProfileCheckB.Checked = true;
             LevelCB1.Enabled = false;
             LevelCheckB.Checked = false;
-
             AudioBitrateCB1.Enabled = false;
+            CropXLocationTBX.Enabled = false;
+            CropYLocationTBX.Enabled = false;
+            CropXSizeTBX.Enabled = false;
+            CropYSizeTBX.Enabled = false;
 
-            
-            this.resolutionCB1.ValueMember = "Value";
+            ResCheckB.Checked = false;
+            AspectRatioCheckB.Checked = false;
+            DeinterlaceCheckB.Checked = false;
+            FPSCheckB.Checked = false;
+            AudioBitrateCheckB.Checked = false;
+            crfCheckB.Checked = false;
+            MaxrateCheckB.Checked = false;
+            BufsizeCheckB.Checked = false;
+            CropCheckB.Checked = false;
+            PresetCheckB.Checked = false;
+            ProfileCheckB.Checked = false;
+            LevelCheckB.Checked = false;
+
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        { //Sätter på eller stänger av checkbboaxar osv vid start
+            Clear();
+            this.resolutionCB1.ValueMember = "Value"; //alla Selectable true är alternativ bland upplösningarna där "4:3" och "16:9" bara är där för att visa vad som är en sådan upplösning
             this.resolutionCB1.DisplayMember = "Text";
             this.resolutionCB1.Items.AddRange(new[] {
-                new ComboBoxItem() { Selectable = false, Text="16:9", Value=0},
+                new ComboBoxItem() { Selectable = false, Text="16:9", Value=0}, //Bara till för att visa
                 new ComboBoxItem() { Selectable = true, Text="1152x648", Value=1},
                 new ComboBoxItem() { Selectable = true, Text="1280x720", Value=2},
                 new ComboBoxItem() { Selectable = true, Text="1366x768", Value=3},
@@ -388,21 +422,31 @@ namespace ffmpegUI
 
         private void DestinationBTN_Click(object sender, EventArgs e)
         {
-            FolderBrowserDialog fbd = new FolderBrowserDialog();
-            fbd.Description = "Custom Description";
-            string sSelectedPath = string.Empty;
-            if (fbd.ShowDialog() == DialogResult.OK)
+            if (0 == 1) //Test kod som jag vill ska vara kvar till tidigare tester
             {
-                sSelectedPath = fbd.SelectedPath;
+                SaveFileDialog sfd1 = new SaveFileDialog();
+            if (sfd1.ShowDialog() == DialogResult.OK)
+            {
+                using (Stream s = File.Open(sfd1.FileName, FileMode.Create))
+                using (StreamWriter sw = new StreamWriter(s))
+                {
+                    sw.Write(OutputNameTBX.Text);
+                }
             }
-            OutputNameTBX.Text = sSelectedPath;
+            }
 
+            FolderBrowserDialog fbd = new FolderBrowserDialog();    //Väljer vart videon ska sparas efter export
+                fbd.Description = "Custom Description";
+                string sSelectedPath = string.Empty;
+                if (fbd.ShowDialog() == DialogResult.OK)
+                {
+                    sSelectedPath = fbd.SelectedPath;
+                }
+                OutputNameTBX.Text = sSelectedPath;
         }
 
         private void PS2PALPRESETBTN_Click(object sender, EventArgs e)
         {
-                     
-
         }
 
         private void PresetSelectCB1_DropDown(object sender, EventArgs e) //Välj preset konfiguration
@@ -415,10 +459,11 @@ namespace ffmpegUI
             PresetSelectCB1.Text = current;
         }
 
-        private void BtnChoosePreset_Click(object sender, EventArgs e)
+        private void BtnChoosePreset_Click(object sender, EventArgs e) //Med denna del kan man välja preset till programmet, som är nedskrivna som txt filer i presets mappen
         {
-            string presettext = PresetSelectCB1.Text; //Tar vad som redan visas i comboboxen
-            if (PresetSelectCB1.Text == "")
+            Clear();
+            string presettext = PresetSelectCB1.Text; //Tar vad som redan visas i presets comboboxen
+            if (!File.Exists(@"Presets\" + presettext)) //Gör inget om filnamnet som är inskrivet ej finns.
             {
             }
             else
@@ -429,7 +474,7 @@ namespace ffmpegUI
                 {
                     foreach (var line in dataline)
                     {
-                        if (line.Contains("Resolution=")) //Om rad innehåller ... så gör detta, annars
+                        if (line.Contains("Resolution=")) //Om rad innehåller ... så gör detta, annars..
                         {
                             string lineResolution = line;
                             lineResolution = (lineResolution.Replace("Resolution=", ""));
@@ -437,7 +482,7 @@ namespace ffmpegUI
                             ResCheckB.Checked = true;
                             resolutionCB1.Text = lineResolution;
                         }
-                        else { }
+                        else { } //Gör inget
                         if (line.Contains("Deinterlace=")) //samma här
                         {
                             string lineDeinterlace = line;
@@ -465,7 +510,7 @@ namespace ffmpegUI
                             FPSCB1.Text = lineFPS;
                         }
                         else { }
-                        if (line.Contains("Maxrate="))
+                        if (line.Contains("Maxrate=")) //Osv
                         {
                             string lineMaxrate = line;
                             lineMaxrate = (lineMaxrate.Replace("Maxrate=", ""));
@@ -550,6 +595,24 @@ namespace ffmpegUI
             else if (AudioBitrateCheckB.Checked == true)
             {
                 AudioBitrateCB1.Enabled = true;
+            }
+        }
+
+        private void CropCheckB_CheckedChanged(object sender, EventArgs e)
+        {
+            if (CropCheckB.Checked == false)
+            {
+                CropXSizeTBX.Enabled = false;
+                CropYSizeTBX.Enabled = false;
+                CropXLocationTBX.Enabled = false;
+                CropYLocationTBX.Enabled = false;
+            }
+            else if (CropCheckB.Checked == true)
+            {
+                CropXSizeTBX.Enabled = true;
+                CropYSizeTBX.Enabled = true;
+                CropXLocationTBX.Enabled = true;
+                CropYLocationTBX.Enabled = true;
             }
         }
     }

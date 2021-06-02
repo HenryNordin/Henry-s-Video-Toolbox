@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.fileselectBTN = new System.Windows.Forms.Button();
             this.fileTBX = new System.Windows.Forms.TextBox();
             this.resolutionCB1 = new System.Windows.Forms.ComboBox();
@@ -76,6 +77,17 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.CropCheckB = new System.Windows.Forms.CheckBox();
+            this.lblCrop = new System.Windows.Forms.Label();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.CropXSizeTBX = new System.Windows.Forms.TextBox();
+            this.CropYSizeTBX = new System.Windows.Forms.TextBox();
+            this.CropXLocationTBX = new System.Windows.Forms.TextBox();
+            this.CropYLocationTBX = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // fileselectBTN
@@ -90,11 +102,12 @@
             // 
             // fileTBX
             // 
+            this.fileTBX.AllowDrop = true;
             this.fileTBX.Location = new System.Drawing.Point(13, 28);
             this.fileTBX.Name = "fileTBX";
             this.fileTBX.Size = new System.Drawing.Size(332, 20);
             this.fileTBX.TabIndex = 1;
-            this.fileTBX.Text = "C:\\Users\\hn0201\\Downloads\\COSTA RICA IN 1080P 60FPS.mp4";
+            this.fileTBX.Text = "C:\\";
             this.fileTBX.TextChanged += new System.EventHandler(this.fileTBX_TextChanged);
             this.fileTBX.DragDrop += new System.Windows.Forms.DragEventHandler(this.fileTBX_DragDrop);
             this.fileTBX.DragEnter += new System.Windows.Forms.DragEventHandler(this.fileTBX_DragEnter);
@@ -437,7 +450,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(566, 95);
+            this.label2.Location = new System.Drawing.Point(319, 111);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(77, 13);
             this.label2.TabIndex = 32;
@@ -449,7 +462,7 @@
             this.VencodCB1.Items.AddRange(new object[] {
             "libx264",
             "libx265"});
-            this.VencodCB1.Location = new System.Drawing.Point(569, 110);
+            this.VencodCB1.Location = new System.Drawing.Point(322, 129);
             this.VencodCB1.Name = "VencodCB1";
             this.VencodCB1.Size = new System.Drawing.Size(61, 21);
             this.VencodCB1.TabIndex = 31;
@@ -520,7 +533,7 @@
             this.OutputNameTBX.Name = "OutputNameTBX";
             this.OutputNameTBX.Size = new System.Drawing.Size(191, 20);
             this.OutputNameTBX.TabIndex = 30;
-            this.OutputNameTBX.Text = "C:\\Users\\hn0201\\Desktop";
+            this.OutputNameTBX.Text = "C:\\";
             // 
             // btnDEBUG
             // 
@@ -581,7 +594,7 @@
             // AudioBitrateCheckB
             // 
             this.AudioBitrateCheckB.AutoSize = true;
-            this.AudioBitrateCheckB.Location = new System.Drawing.Point(16, 285);
+            this.AudioBitrateCheckB.Location = new System.Drawing.Point(233, 90);
             this.AudioBitrateCheckB.Name = "AudioBitrateCheckB";
             this.AudioBitrateCheckB.Size = new System.Drawing.Size(15, 14);
             this.AudioBitrateCheckB.TabIndex = 46;
@@ -591,7 +604,7 @@
             // AudioBitrateLBL
             // 
             this.AudioBitrateLBL.AutoSize = true;
-            this.AudioBitrateLBL.Location = new System.Drawing.Point(13, 267);
+            this.AudioBitrateLBL.Location = new System.Drawing.Point(230, 72);
             this.AudioBitrateLBL.Name = "AudioBitrateLBL";
             this.AudioBitrateLBL.Size = new System.Drawing.Size(66, 13);
             this.AudioBitrateLBL.TabIndex = 45;
@@ -609,7 +622,7 @@
             "192",
             "256",
             "320"});
-            this.AudioBitrateCB1.Location = new System.Drawing.Point(35, 282);
+            this.AudioBitrateCB1.Location = new System.Drawing.Point(252, 87);
             this.AudioBitrateCB1.Name = "AudioBitrateCB1";
             this.AudioBitrateCB1.Size = new System.Drawing.Size(42, 21);
             this.AudioBitrateCB1.TabIndex = 44;
@@ -618,7 +631,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(78, 285);
+            this.label4.Location = new System.Drawing.Point(295, 90);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(30, 13);
             this.label4.TabIndex = 47;
@@ -627,7 +640,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(566, 137);
+            this.label5.Location = new System.Drawing.Point(319, 67);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(77, 13);
             this.label5.TabIndex = 49;
@@ -635,17 +648,173 @@
             // 
             // comboBox1
             // 
+            this.comboBox1.Enabled = false;
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(569, 152);
+            this.comboBox1.Items.AddRange(new object[] {
+            "mp3"});
+            this.comboBox1.Location = new System.Drawing.Point(322, 87);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(61, 21);
             this.comboBox1.TabIndex = 48;
+            // 
+            // CropCheckB
+            // 
+            this.CropCheckB.AutoSize = true;
+            this.CropCheckB.Location = new System.Drawing.Point(13, 245);
+            this.CropCheckB.Name = "CropCheckB";
+            this.CropCheckB.Size = new System.Drawing.Size(15, 14);
+            this.CropCheckB.TabIndex = 52;
+            this.CropCheckB.UseVisualStyleBackColor = true;
+            this.CropCheckB.CheckedChanged += new System.EventHandler(this.CropCheckB_CheckedChanged);
+            // 
+            // lblCrop
+            // 
+            this.lblCrop.AutoSize = true;
+            this.lblCrop.Location = new System.Drawing.Point(10, 227);
+            this.lblCrop.Name = "lblCrop";
+            this.lblCrop.Size = new System.Drawing.Size(29, 13);
+            this.lblCrop.TabIndex = 51;
+            this.lblCrop.Text = "Crop";
+            // 
+            // comboBox2
+            // 
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12",
+            "13",
+            "14",
+            "15",
+            "16",
+            "17",
+            "18",
+            "19",
+            "20",
+            "21",
+            "22",
+            "23",
+            "24",
+            "25",
+            "26",
+            "27",
+            "28",
+            "29",
+            "30",
+            "31",
+            "32",
+            "33",
+            "34",
+            "35",
+            "36",
+            "37",
+            "38",
+            "39",
+            "40",
+            "41",
+            "42",
+            "43",
+            "44",
+            "45",
+            "46",
+            "47",
+            "48",
+            "49",
+            "50"});
+            this.comboBox2.Location = new System.Drawing.Point(688, 160);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(82, 21);
+            this.comboBox2.TabIndex = 50;
+            // 
+            // CropXSizeTBX
+            // 
+            this.CropXSizeTBX.Location = new System.Drawing.Point(64, 241);
+            this.CropXSizeTBX.Name = "CropXSizeTBX";
+            this.CropXSizeTBX.Size = new System.Drawing.Size(50, 20);
+            this.CropXSizeTBX.TabIndex = 53;
+            // 
+            // CropYSizeTBX
+            // 
+            this.CropYSizeTBX.Location = new System.Drawing.Point(64, 267);
+            this.CropYSizeTBX.Name = "CropYSizeTBX";
+            this.CropYSizeTBX.Size = new System.Drawing.Size(50, 20);
+            this.CropYSizeTBX.TabIndex = 54;
+            // 
+            // CropXLocationTBX
+            // 
+            this.CropXLocationTBX.Location = new System.Drawing.Point(169, 241);
+            this.CropXLocationTBX.Name = "CropXLocationTBX";
+            this.CropXLocationTBX.Size = new System.Drawing.Size(48, 20);
+            this.CropXLocationTBX.TabIndex = 55;
+            // 
+            // CropYLocationTBX
+            // 
+            this.CropYLocationTBX.Location = new System.Drawing.Point(169, 267);
+            this.CropYLocationTBX.Name = "CropYLocationTBX";
+            this.CropYLocationTBX.Size = new System.Drawing.Size(48, 20);
+            this.CropYLocationTBX.TabIndex = 56;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(29, 245);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(35, 13);
+            this.label6.TabIndex = 57;
+            this.label6.Text = "X size";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(29, 267);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(35, 13);
+            this.label7.TabIndex = 58;
+            this.label7.Text = "Y size";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(114, 267);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(53, 13);
+            this.label8.TabIndex = 60;
+            this.label8.Text = "Y position";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(114, 245);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(53, 13);
+            this.label9.TabIndex = 59;
+            this.label9.Text = "X position";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(663, 450);
+            this.ClientSize = new System.Drawing.Size(664, 442);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.CropYLocationTBX);
+            this.Controls.Add(this.CropXLocationTBX);
+            this.Controls.Add(this.CropYSizeTBX);
+            this.Controls.Add(this.CropXSizeTBX);
+            this.Controls.Add(this.CropCheckB);
+            this.Controls.Add(this.lblCrop);
+            this.Controls.Add(this.comboBox2);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label4);
@@ -694,8 +863,9 @@
             this.Controls.Add(this.resolutionCB1);
             this.Controls.Add(this.fileTBX);
             this.Controls.Add(this.fileselectBTN);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
-            this.Text = "ffmpeg UI V0.1";
+            this.Text = "ffmpeg UI";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -752,6 +922,17 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.CheckBox CropCheckB;
+        private System.Windows.Forms.Label lblCrop;
+        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.TextBox CropXSizeTBX;
+        private System.Windows.Forms.TextBox CropYSizeTBX;
+        private System.Windows.Forms.TextBox CropXLocationTBX;
+        private System.Windows.Forms.TextBox CropYLocationTBX;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label9;
     }
 }
 
