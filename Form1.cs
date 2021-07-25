@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Diagnostics; //TEST
 using System.IO;
 
 namespace ffmpegUI
@@ -14,9 +15,18 @@ namespace ffmpegUI
     using System.CodeDom.Compiler;
     public partial class Form1 : Form
     {
+        string outputFFMPEG;
+        string VideoLength;
+        string CurrentVideoProgress;
+        double totalSecondsVideoLength;
+        double totalSecondsCurrentProgress;
+        string DotTxt;
+
+        System.Diagnostics.Process ffmpeg = new System.Diagnostics.Process();
         private class ComboBoxItem
         {
             public int Value { get; set; }
+            public double Progress { get; set; }
             public string Text { get; set; }
             public bool Selectable { get; set; }
         }
@@ -47,8 +57,10 @@ namespace ffmpegUI
             {
                 fileTBX.Text = openFileDialog1.FileName;
             }
+            Properties.Settings.Default.fileTBXPrevious = fileTBX.Text;
+            Properties.Settings.Default.Save();
         }
-        public double Progress { get; set; }
+
         private void btnDEBUG_Click(object sender, EventArgs e) //Här läses alla textrutor, comborutor etc in och uppfattas
         {
             string ExportName = OutputNameTBX.Text + "\u005c" + FileNameOutputTBX.Text + FileEXTCB1.Text; //Läser in vart filen ska och vad den ska heta
@@ -63,7 +75,7 @@ namespace ffmpegUI
             }
 
             string vf = string.Empty; //Samma som tidigare
-            if ((resolutionCB1.Enabled || deinterlaceCB1.Enabled == true))
+            if ((resolutionCB1.Enabled || deinterlaceCB1.Enabled || CropCheckB.Checked || FinterpolateCB1.Enabled == true))
             {
                 vf = "-vf ";
             }
@@ -82,18 +94,48 @@ namespace ffmpegUI
                 Deinterlace = "";
             }
 
-            string Resolution = string.Empty;
-            if ((resolutionCB1.Enabled && deinterlaceCB1.Enabled == true))
+            string CropNPos = string.Empty;       //WORK IN PROGRESS//https://video.stackexchange.com/questions/4563/how-can-i-crop-a-video-with-ffmpeg //
+            if (deinterlaceCB1.Enabled == true)
             {
-                Resolution = ",scale=" + resolutionCB1.Text + " ";
+                CropNPos = ",";
             }
-            else if (resolutionCB1.Enabled == true)
+            if (CropCheckB.Checked == true)
             {
-                Resolution = "scale=" + resolutionCB1.Text + " ";
+                //Normalt ffmpeg kommand "-filter:v \u0022 crop = 80:60:200:100 \u0022 "
+                CropNPos = CropNPos + "\u0022 crop = " + CropXSizeTBX.Text + ":" + CropYSizeTBX.Text + ":" + CropXLocationTBX.Text + ":" + CropYLocationTBX.Text + " \u0022"; //kollar av vart videon ska cropas och hur mycket
+                //" -filter:v " + "\u0022" + "minterpolate = 'fps=60'" + "\u0022 ";
+            }
+            else 
+            {
+                CropNPos = "";
+            }
+
+            string Resolution = string.Empty;
+            if (deinterlaceCB1.Enabled || CropCheckB.Checked == true)
+            {
+                Resolution = ",";
+            }
+            if (resolutionCB1.Enabled == true)
+            {
+                Resolution = Resolution + "scale=" + resolutionCB1.Text + "";
             }
             else
             {
-                Resolution = " ";
+                Resolution = "";
+            }
+
+            string Finterpolate = string.Empty;
+            if (deinterlaceCB1.Enabled || CropCheckB.Checked || resolutionCB1.Enabled == true)
+            {
+                Finterpolate = ",";
+            }
+            if (FinterpolateCB1.Enabled == true)
+            {
+                Finterpolate = Finterpolate + "\u0022" + "minterpolate='fps=" + FinterpolateCB1.Text + "'" +  "\u0022";
+            }
+            else
+            {
+                Finterpolate = "";
             }
 
             string Vcodec = string.Empty;
@@ -182,25 +224,39 @@ namespace ffmpegUI
                 AudioBitrate = "";
             }
 
-            string CropNPos = string.Empty;       //WORK IN PROGRESS//https://video.stackexchange.com/questions/4563/how-can-i-crop-a-video-with-ffmpeg //
-            if (CropCheckB.Checked == true)
+            string VideoBitrate = string.Empty;
+            if (VideoBitrateCB1.Enabled == true)
             {
-                //Normalt ffmpeg kommand "-filter:v \u0022 crop = 80:60:200:100 \u0022 "
-                CropNPos = "-filter:v \u0022 crop = " + CropXSizeTBX.Text + ":" + CropYSizeTBX.Text + ":" + CropXLocationTBX.Text + ":" + CropYLocationTBX.Text + " \u0022"; //kollar av vart videon ska cropas och hur mycket
+                double VideoBitrateCalc = double.Parse(VideoBitrateCB1.Text) * 1000000;
+                VideoBitrate = "-vb " + VideoBitrateCalc + " ";
             }
             else
             {
-                CropNPos = "";
+                VideoBitrate = "";
             }
 
 
             string path = @""; //Starta i program mappen
+
+            string ffprobePath = System.IO.Path.Combine(path, "ffprobe.exe");
+            string ffprobeParams = "-show_streams \u0022" + fileTBX.Text + "\u0022"; 
+            var ffprobe = new System.Diagnostics.Process();
+            ffprobe.StartInfo.FileName = "cmd.exe";
+            ffprobe.StartInfo.Arguments = "/k " + ffprobePath + " " + ffprobeParams;
+            //ffprobe.Start();
+
+            System.Diagnostics.Process ffmpeg = new System.Diagnostics.Process();
             string ffmpegPath = System.IO.Path.Combine(path, "ffmpeg.exe"); //Programmer som ska öppnas och nedan finns paramerterna vilket säger till om vad som ska göras när programet går igång.
-            string ffmpegParams = "-i \u0022" + @fileTBX.Text + "\u0022 " + AspectRatio + vf + Deinterlace + Resolution + Vcodec + Preset + Profile + Level + crf + Maxrate + Bufsize + FPS + AudioBitrate + CropNPos +  " -movflags +faststart -y " + "\u0022"  + ExportName + "\u0022 "; //"-strict experimental -c:a aac -b:a 96k 
-            var ffmpeg = new System.Diagnostics.Process(); //Ny process
+            string ffmpegParams = "-i \u0022" + @fileTBX.Text + "\u0022 " + AspectRatio + vf + Deinterlace + CropNPos + Resolution + Finterpolate + " " + Vcodec + Preset + Profile + Level + crf + Maxrate + Bufsize + FPS + AudioBitrate + VideoBitrate +  " -movflags +faststart -y " + "\u0022"  + ExportName + "\u0022 "; //"-strict experimental -c:a aac -b:a 96k 
             ffmpeg.StartInfo.FileName = "cmd.exe"; //Väljer Kommandotolken som ska startas
             ffmpeg.StartInfo.Arguments = "/k " + ffmpegPath + " " + ffmpegParams; //Start argument
+            ffmpeg.StartInfo.UseShellExecute = false;
+            ffmpeg.StartInfo.CreateNoWindow = false;
+            ffmpeg.StartInfo.RedirectStandardOutput = false;
             ffmpeg.Start(); //Startar CMD med alla information åvan
+
+            
+
         }
 
         private void fileTBX_DragDrop(object sender, DragEventArgs e)
@@ -227,6 +283,7 @@ namespace ffmpegUI
             PresetSelectCB1.Enabled = true;
             BtnChoosePreset.Enabled = true;
             resolutionCB1.Enabled = false;
+            FinterpolateCB1.Enabled = false;
             AspectRatioCB1.Enabled = false;
             deinterlaceCB1.Enabled = false;
             FPSCB1.Enabled = false;
@@ -240,16 +297,22 @@ namespace ffmpegUI
             LevelCB1.Enabled = false;
             LevelCheckB.Checked = false;
             AudioBitrateCB1.Enabled = false;
+            VideoBitrateCB1.Enabled = false;
             CropXLocationTBX.Enabled = false;
             CropYLocationTBX.Enabled = false;
             CropXSizeTBX.Enabled = false;
             CropYSizeTBX.Enabled = false;
 
+            PresetCB1.Enabled = false;
+
+
             ResCheckB.Checked = false;
             AspectRatioCheckB.Checked = false;
             DeinterlaceCheckB.Checked = false;
+            FinterpolateCheckB.Checked = false;
             FPSCheckB.Checked = false;
             AudioBitrateCheckB.Checked = false;
+            VideoBitrateCheckB.Checked = false;
             crfCheckB.Checked = false;
             MaxrateCheckB.Checked = false;
             BufsizeCheckB.Checked = false;
@@ -262,6 +325,10 @@ namespace ffmpegUI
 
         private void Form1_Load(object sender, EventArgs e)
         { //Sätter på eller stänger av checkbboaxar osv vid start
+            lblPercent.Text = "0%";
+            lblCurrentTime.Text = "00:00:00";
+            lblFullTime.Text = "00:00:00";
+            
             Clear();
             this.resolutionCB1.ValueMember = "Value"; //alla Selectable true är alternativ bland upplösningarna där "4:3" och "16:9" bara är där för att visa vad som är en sådan upplösning
             this.resolutionCB1.DisplayMember = "Text";
@@ -293,6 +360,8 @@ namespace ffmpegUI
                     cb.SelectedIndex = -1;
                 }
             };
+            fileTBX.Text = Properties.Settings.Default.fileTBXPrevious;
+            OutputNameTBX.Text = Properties.Settings.Default.OutputNameTBXPrevious;
 
         }
 
@@ -443,14 +512,16 @@ namespace ffmpegUI
                     sSelectedPath = fbd.SelectedPath;
                 }
                 OutputNameTBX.Text = sSelectedPath;
-        }
-
-        private void PS2PALPRESETBTN_Click(object sender, EventArgs e)
-        {
+            Properties.Settings.Default.OutputNameTBXPrevious = OutputNameTBX.Text;
+            Properties.Settings.Default.Save();
         }
 
         private void PresetSelectCB1_DropDown(object sender, EventArgs e) //Välj preset konfiguration
         {
+            if (!Directory.Exists(@"Presets\"))
+            {
+                Directory.CreateDirectory(@"Presets\");
+            }
             string current = PresetSelectCB1.Text;
             DirectoryInfo d = new DirectoryInfo(@"Presets\");//Preset är mappen som kollas i
             FileInfo[] Files = d.GetFiles("*.txt"); //Sammlar alla filnamn
@@ -510,6 +581,15 @@ namespace ffmpegUI
                             FPSCB1.Text = lineFPS;
                         }
                         else { }
+                        if (line.Contains("MInterpolate=")) //och så vidare
+                        {
+                            string lineFinterpolate = line;
+                            lineFinterpolate = (lineFinterpolate.Replace("MInterpolate=", ""));
+                            FinterpolateCB1.Enabled = true;
+                            FinterpolateCheckB.Checked = true;
+                            FinterpolateCB1.Text = lineFinterpolate;
+                        }
+                        else { }
                         if (line.Contains("Maxrate=")) //Osv
                         {
                             string lineMaxrate = line;
@@ -545,6 +625,24 @@ namespace ffmpegUI
                             VencodCB1.Text = lineVideoEncoder;
                         }
                         else { }
+                        if (line.Contains("VideoBitrate="))
+                        {
+                            string lineVideoBitrate = line;
+                            lineVideoBitrate = (lineVideoBitrate.Replace("VideoBitrate=", ""));
+                            VideoBitrateCB1.Enabled = true;
+                            VideoBitrateCheckB.Checked = true;
+                            VideoBitrateCB1.Text = lineVideoBitrate;
+                        }
+                        else { }
+                        if (line.Contains("AudioBitrate="))
+                        {
+                            string lineAudioBitrate = line;
+                            lineAudioBitrate = (lineAudioBitrate.Replace("AudioBitrate=", ""));
+                            AudioBitrateCB1.Enabled = true;
+                            AudioBitrateCheckB.Checked = true;
+                            AudioBitrateCB1.Text = lineAudioBitrate;
+                        }
+                        else { }
                         if (line.Contains("SpeedPreset="))
                         {
                             string lineSpeedPreset = line;
@@ -572,13 +670,13 @@ namespace ffmpegUI
                             LevelCB1.Text = lineLevel;
                         }
                         else { }
-                        if (line.Contains("AudioBitrate="))
+                        if (line.Contains("Crop="))
                         {
-                            string lineAudioBitrate = line;
-                            lineAudioBitrate = (lineAudioBitrate.Replace("AudioBitrate=", ""));
-                            AudioBitrateCB1.Enabled = true;
-                            AudioBitrateCheckB.Checked = true;
-                            AudioBitrateCB1.Text = lineAudioBitrate;
+                            //string lineCrop = line;
+                            //lineCrop = (lineCrop.Replace("Crop=", ""));
+                            //CropCB1.Enabled = true;
+                            //CropCheckB.Checked = true;
+                            //CropCB1.Text = lineCrop;
                         }
                         else { }
                     }
@@ -614,6 +712,549 @@ namespace ffmpegUI
                 CropXLocationTBX.Enabled = true;
                 CropYLocationTBX.Enabled = true;
             }
+        }
+
+        private void VideoBitrateCheckB_CheckedChanged(object sender, EventArgs e)
+        {
+            if (VideoBitrateCheckB.Checked == false)
+            {
+                VideoBitrateCB1.Enabled = false;
+            }
+            else if (VideoBitrateCheckB.Checked == true)
+            {
+                VideoBitrateCB1.Enabled = true;
+            }
+        }
+
+        private void btnSAVE_Click(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.ResCheckB = ResCheckB.Checked;
+            Properties.Settings.Default.resolutionCB1 = resolutionCB1.Text;
+            Properties.Settings.Default.AspectRatioCheckB = AspectRatioCheckB.Checked;
+            Properties.Settings.Default.AspectRatioCB1 = AspectRatioCB1.Text;
+            Properties.Settings.Default.fileTBX = fileTBX.Text;
+            Properties.Settings.Default.Save();
+        }
+
+        private void btnLOAD_Click(object sender, EventArgs e)
+        {
+            ResCheckB.Checked = Properties.Settings.Default.ResCheckB;
+            resolutionCB1.Text = Properties.Settings.Default.resolutionCB1;
+            AspectRatioCheckB.Checked = Properties.Settings.Default.AspectRatioCheckB;
+            AspectRatioCB1.Text = Properties.Settings.Default.AspectRatioCB1;
+            fileTBX.Text = Properties.Settings.Default.fileTBX;
+        }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            Clear();
+        }
+
+        private void FinterpolateCheckB_CheckedChanged(object sender, EventArgs e)
+        {
+            if (FinterpolateCheckB.Checked == false)
+            {
+                FinterpolateCB1.Enabled = false;
+            }
+            else if (FinterpolateCheckB.Checked == true)
+            {
+                FinterpolateCB1.Enabled = true;
+            }
+        }
+
+        private void btnRUN_Click(object sender, EventArgs e)
+        {
+            ProgressTimer.Enabled = true;
+            VideoProgressBar.Enabled = true;
+
+            lblPercent.Text = "0%";
+            lblFullTime.Text = "00:00:00";
+            lblCurrentTime.Text = "00:00:00";
+
+
+            string ExportName = OutputNameTBX.Text + "\u005c" + FileNameOutputTBX.Text + FileEXTCB1.Text; //Läser in vart filen ska och vad den ska heta
+            string AskOverWrite = string.Empty;
+            if (File.Exists(ExportName))
+            {
+                string message = ExportName.ToString() + " already exists. \r\nDo you want to replace it?";
+                string title = "Confirm overwrite?";
+
+                MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+                DialogResult result = MessageBox.Show(message, title, buttons, MessageBoxIcon.Warning);
+                if (result == DialogResult.Yes)
+                {
+                    AskOverWrite = "-y ";
+                }
+                else
+                {
+                    AskOverWrite = "-n ";
+                }
+            }
+            string AspectRatio = string.Empty; //Aspect ratio, form på videon
+            if (AspectRatioCB1.Enabled == true) //Om aktiverad så kollar den vad för värde som skrivits in
+            {
+                AspectRatio = "-aspect " + AspectRatioCB1.Text + " ";
+            }
+            else //Annars gör inget
+            {
+                AspectRatio = "";
+            }
+
+            string vf = string.Empty; //Samma som tidigare
+            if ((resolutionCB1.Enabled || deinterlaceCB1.Enabled || CropCheckB.Checked || FinterpolateCB1.Enabled == true))
+            {
+                vf = "-vf ";
+            }
+            else
+            {
+                vf = "";
+            }
+
+            string Deinterlace = string.Empty;
+            if (deinterlaceCB1.Enabled == true)
+            {
+                Deinterlace = deinterlaceCB1.Text;
+            }
+            else
+            {
+                Deinterlace = "";
+            }
+
+            string CropNPos = string.Empty;       //WORK IN PROGRESS//https://video.stackexchange.com/questions/4563/how-can-i-crop-a-video-with-ffmpeg //
+            if (deinterlaceCB1.Enabled == true)
+            {
+                CropNPos = ",";
+            }
+            if (CropCheckB.Checked == true)
+            {
+                //Normalt ffmpeg kommand "-filter:v \u0022 crop = 80:60:200:100 \u0022 "
+                CropNPos = CropNPos + "\u0022 crop = " + CropXSizeTBX.Text + ":" + CropYSizeTBX.Text + ":" + CropXLocationTBX.Text + ":" + CropYLocationTBX.Text + " \u0022"; //kollar av vart videon ska cropas och hur mycket
+                //" -filter:v " + "\u0022" + "minterpolate = 'fps=60'" + "\u0022 ";
+            }
+            else
+            {
+                CropNPos = "";
+            }
+
+            string Resolution = string.Empty;
+            if (deinterlaceCB1.Enabled || CropCheckB.Checked == true)
+            {
+                Resolution = ",";
+            }
+            if (resolutionCB1.Enabled == true)
+            {
+                Resolution = Resolution + "scale=" + resolutionCB1.Text + "";
+            }
+            else
+            {
+                Resolution = "";
+            }
+
+            string Finterpolate = string.Empty;
+            if (deinterlaceCB1.Enabled || CropCheckB.Checked || resolutionCB1.Enabled == true)
+            {
+                Finterpolate = ",";
+            }
+            if (FinterpolateCB1.Enabled == true)
+            {
+                Finterpolate = Finterpolate + "\u0022" + "minterpolate='fps=" + FinterpolateCB1.Text + "'" + "\u0022";
+            }
+            else
+            {
+                Finterpolate = "";
+            }
+
+            string Vcodec = string.Empty;
+            Vcodec = "-c:v " + VencodCB1.Text + " ";
+
+
+            string Preset = string.Empty;
+            if (PresetCB1.Enabled == true)
+            {
+                Preset = "-preset " + PresetCB1.Text + " ";
+            }
+            else
+            {
+                Preset = "";
+            }
+
+            string Profile = string.Empty;
+            if (ProfileCB1.Enabled == true)
+            {
+                Profile = "-profile:v " + ProfileCB1.Text + " ";
+            }
+            else
+            {
+                Profile = "";
+            }
+
+            string Level = string.Empty;
+            if (LevelCB1.Enabled == true)
+            {
+                Level = "-level:v " + LevelCB1.Text + " ";
+            }
+            else
+            {
+                Level = "";
+            }
+
+            string crf = string.Empty;
+            if (crfCB1.Enabled == true)
+            {
+                crf = "-crf " + crfCB1.Text + " ";
+            }
+            else
+            {
+                crf = "";
+            }
+
+            string Maxrate = string.Empty;
+            if (MaxrateCB1.Enabled == true)
+            {
+                Maxrate = "-maxrate " + MaxrateCB1.Text + " ";
+            }
+            else
+            {
+                Maxrate = "";
+            }
+
+            string Bufsize = string.Empty;
+            if (BufSizeCB1.Enabled == true)
+            {
+                Bufsize = "-bufsize " + BufSizeCB1.Text + " ";
+            }
+            else
+            {
+                Maxrate = "";
+            }
+
+
+            string FPS = string.Empty;
+            if (FPSCB1.Enabled == true)
+            {
+                FPS = "-r " + FPSCB1.Text + " ";
+            }
+            else
+            {
+                FPS = "";
+            }
+
+            string AudioBitrate = string.Empty;
+            if (AudioBitrateCB1.Enabled == true)
+            {
+                int AudioBitrateCalc = int.Parse(AudioBitrateCB1.Text) * 1000;
+                AudioBitrate = "-ab " + AudioBitrateCalc + " ";
+            }
+            else
+            {
+                AudioBitrate = "";
+            }
+
+            string VideoBitrate = string.Empty;
+            if (VideoBitrateCB1.Enabled == true)
+            {
+                double VideoBitrateCalc = double.Parse(VideoBitrateCB1.Text) * 1000000;
+                VideoBitrate = "-vb " + VideoBitrateCalc + " ";
+            }
+            else
+            {
+                VideoBitrate = "";
+            }
+
+            string path = @""; //Starta i program mappen
+            ffmpeg.StartInfo.FileName = path + "ffmpeg.exe";
+            ffmpeg.StartInfo.Arguments = string.Format(@"-i " + "\u0022" + @fileTBX.Text + "\u0022 " + AspectRatio + vf + Deinterlace + CropNPos + Resolution + Finterpolate + " " + Vcodec + Preset + Profile + Level + crf + Maxrate + Bufsize + FPS + AudioBitrate + VideoBitrate + " -movflags +faststart " + AskOverWrite + "\u0022" + ExportName + "\u0022 ");
+            ffmpeg.StartInfo.UseShellExecute = false;
+            ffmpeg.StartInfo.CreateNoWindow = true; //true
+            ffmpeg.StartInfo.RedirectStandardError = true;
+            ffmpeg.StartInfo.RedirectStandardInput = true;
+            ffmpeg.Start();
+
+            Console.SetIn(ffmpeg.StandardError);
+            Action _loop = () =>
+            {
+                string _line = null;
+                while (true)
+                {
+                    _line = Console.ReadLine();
+                    if (_line == null)// if ffmpeg.exe exit , ReadLine would return null
+                        break;
+                    this.UpdateProgress(_line);
+                }
+            };
+            var _result = _loop.BeginInvoke(null, null);
+        }
+
+        private void UpdateProgress(string _line)
+        {
+            string output;
+            if (this.InvokeRequired)
+            {
+                Action<string> _updater = this.UpdateProgress;
+                this.Invoke(_updater, _line);
+
+            }
+            else
+            {
+                outputFFMPEG = (_line);
+                // Duration: 00:02:09.56, start: 0.000000, bitrate: 19459 kb/s
+                VideoLength = getBetween(outputFFMPEG, "Duration: ", ", ");
+                if (VideoLength.Length > 0)
+                {
+                    TimeSpan VideoLengthRAW = TimeSpan.Parse(VideoLength);
+                    totalSecondsVideoLength = VideoLengthRAW.TotalSeconds;
+
+                }
+                else
+                {
+
+                }
+
+
+                if (outputFFMPEG == null)
+                {
+
+                }
+                else
+                {
+                    CurrentVideoProgress = getBetween(outputFFMPEG, "time=", " ");
+                    if (CurrentVideoProgress.Length > 0)
+                    {
+                        TimeSpan CurrentVideoProgressRAW = TimeSpan.Parse(CurrentVideoProgress);
+                        totalSecondsCurrentProgress = CurrentVideoProgressRAW.TotalSeconds;
+
+                    }
+                    else
+                    {
+
+                    }
+                }
+
+                
+
+                this.OUTPUTTBX.AppendText(_line + "\r\n");
+                this.OUTPUTTBX.ScrollToCaret();
+            }
+        }
+
+        public static string getBetween(string strSource, string strStart, string strEnd)
+        {
+            if (strSource.Contains(strStart) && strSource.Contains(strEnd))
+            {
+                int Start, End;
+                Start = strSource.IndexOf(strStart, 0) + strStart.Length;
+                End = strSource.IndexOf(strEnd, Start);
+                return strSource.Substring(Start, End - Start);
+            }
+
+            return "";
+        }
+
+        private void ProgressTimer_Tick(object sender, EventArgs e)
+        {
+
+            
+
+            //CurrentVideoProgress
+            //VideoLength
+
+
+            VideoProgressBar.Minimum = 0;
+            VideoProgressBar.Maximum = (int)totalSecondsVideoLength; //100   //(int) totalSeconds
+            
+            int hoursCurrent = (int) totalSecondsCurrentProgress / 3600;
+            int minsCurrent = (int) (totalSecondsCurrentProgress % 3600) / 60;
+            int secCurrent = (int) totalSecondsCurrentProgress % 60;
+
+            lblCurrentTime.Text = string.Format("{0:D2}:{1:D2}:{2:D2}", hoursCurrent, minsCurrent, secCurrent);
+
+            int hoursVideoLength = (int)totalSecondsVideoLength / 3600;
+            int minsVideoLength = (int)(totalSecondsVideoLength % 3600) / 60;
+            int secVideoLength = (int)totalSecondsVideoLength % 60;
+            lblFullTime.Text = string.Format("{0:D2}:{1:D2}:{2:D2}", hoursVideoLength, minsVideoLength, secVideoLength);
+
+
+            lblPercent.Text = ((int)Math.Round((double)(100 * totalSecondsCurrentProgress) / totalSecondsVideoLength)).ToString() + "%";
+            //( ((int) 100 * (totalSecondsCurrentProgress / totalSecondsVideoLength))).ToString();
+
+
+            //lblFullTime.Text = totalSecondsVideoLength.ToString();
+            //lblCurrentTime.Text = totalSecondsCurrentProgress.ToString();
+
+            if (totalSecondsVideoLength > 0)
+            {
+                VideoProgressBar.Value = (int) totalSecondsCurrentProgress;
+            }
+            else
+            {
+
+            }
+
+
+
+            if (totalSecondsVideoLength == 0)
+            {
+
+            }
+            else
+            {
+                if (VideoProgressBar.Maximum ==  totalSecondsVideoLength -1 )
+                {
+                    ProgressTimer.Stop();
+                    VideoProgressBar.Value = (int) totalSecondsVideoLength;
+                }
+            }
+
+            
+        }
+
+        public void Cancel_Click(object sender, EventArgs e)
+        {
+            ffmpeg.StandardInput.WriteLine("q");
+
+            //ffmpeg.StandardInput.Close();
+
+            //ffmpeg.
+            
+            //ffmpeg.StandardInput();
+        }
+
+        void ExportPreset()
+        {
+            using (StreamWriter writetext = new StreamWriter(@"Presets\" + PresetSelectCB1.Text + DotTxt))
+            {
+                writetext.WriteLine("FFMPEG UI PRESET CONFIG:");
+                if (resolutionCB1.Enabled == true)
+                {
+                    writetext.WriteLine("Resolution=" + resolutionCB1.Text);
+                }
+                else { }
+                if (deinterlaceCB1.Enabled == true)
+                {
+                    writetext.WriteLine("Deinterlace=" + deinterlaceCB1.Text);
+                }
+                else { }
+                if (AspectRatioCB1.Enabled == true)
+                {
+                    writetext.WriteLine("AspectRatio=" + AspectRatioCB1.Text);
+                }
+                else { }
+                if (FPSCB1.Enabled == true)
+                {
+                    writetext.WriteLine("FPS=" + FPSCB1.Text);
+                }
+                else { }
+                if (FinterpolateCB1.Enabled == true)
+                {
+                    writetext.WriteLine("MInterpolate=" + FinterpolateCB1.Text);
+                }
+                else { }
+                if (MaxrateCB1.Enabled == true)
+                {
+                    writetext.WriteLine("Maxrate=" + MaxrateCB1.Text);
+                }
+                else { }
+                if (BufSizeCB1.Enabled == true)
+                {
+                    writetext.WriteLine("BufSize=" + BufSizeCB1.Text);
+                }
+                else { }
+                if (crfCB1.Enabled == true)
+                {
+                    writetext.WriteLine("CRF=" + crfCB1.Text);
+                }
+                else { }
+                if (VencodCB1.Enabled == true)
+                {
+                    writetext.WriteLine("VideoEncoder=" + VencodCB1.Text);
+                }
+                else { }
+                if (VideoBitrateCB1.Enabled == true)
+                {
+                    writetext.WriteLine("VideoBitrate=" + VideoBitrateCB1.Text);
+                }
+                else { }
+                if (AudioBitrateCB1.Enabled == true)
+                {
+                    writetext.WriteLine("AudioBitrate=" + AudioBitrateCB1.Text);
+                }
+                else { }
+                if (PresetCB1.Enabled == true)
+                {
+                    writetext.WriteLine("SpeedPreset=" + PresetCB1.Text);
+                }
+                else { }
+                if (ProfileCB1.Enabled == true)
+                {
+                    writetext.WriteLine("Profile=" + ProfileCB1.Text);
+                }
+                else { }
+                if (LevelCB1.Enabled == true)
+                {
+                    writetext.WriteLine("Level=" + LevelCB1.Text);
+                }
+                else { }
+                if (CropCheckB.Checked == true)
+                {
+                    writetext.WriteLine("Crop=" + CropXSizeTBX.Text);
+                }
+                else { }
+
+            }
+        }
+
+        private void btnExportPreset_Click(object sender, EventArgs e)
+        {
+            if (PresetSelectCB1.Text.Contains(".txt")  )
+            {
+                DotTxt = "";
+            }
+            else
+            { DotTxt = ".txt"; }
+            string filname = @"Presets\" + PresetSelectCB1.Text + DotTxt;
+            if (File.Exists(filname))
+            {
+                string message = PresetSelectCB1.Text + " already exists. \r\nDo you want to replace it?";
+                string title = "Confirm overwrite?";
+                MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+                DialogResult result = MessageBox.Show(message, title, buttons, MessageBoxIcon.Warning);
+                if (result == DialogResult.Yes)
+                {
+                    ExportPreset();
+                }
+                else
+                {}
+            }
+            else
+            {
+                ExportPreset();
+            }
+        }
+
+        private void btnDeletePreset_Click(object sender, EventArgs e)
+        {
+            if (PresetSelectCB1.Text.Contains(".txt"))
+            {
+                DotTxt = "";
+            }
+            else
+            { DotTxt = ".txt"; }
+            if (File.Exists(@"Presets\" + PresetSelectCB1.Text + DotTxt))
+            {
+                string message = "Do you want to delete " + PresetSelectCB1.Text + "?";
+                string title = "Delete file?";
+                MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+                DialogResult result = MessageBox.Show(message, title, buttons, MessageBoxIcon.Warning);
+                if (result == DialogResult.Yes)
+                {
+                    File.Delete(@"Presets\" + PresetSelectCB1.Text + DotTxt);
+                    PresetSelectCB1.Text = "";
+                }
+                else
+                { }
+            }
+            else
+            { }
         }
     }
 }
