@@ -64,4 +64,3 @@ C:\Users\Henry\Documents\GitHub\FFmpegUI\obj\Debug\ffmpegUI.application
 C:\Users\Henry\Documents\GitHub\FFmpegUI\obj\Debug\ffmpegUI.exe
 C:\Users\Henry\Documents\GitHub\FFmpegUI\obj\Debug\ffmpegUI.pdb
 C:\Users\Henry\Documents\GitHub\FFmpegUI\bin\Debug\ffmpegUI.exe.config
-C:\Users\Henry\Documents\GitHub\FFmpegUI\obj\Debug\ffmpegUI.Options.resources
