@@ -21,6 +21,7 @@ namespace ffmpegUI
         int totalSecondsVideoLength;
         int totalSecondsCurrentProgress;
         string DotTxt;
+        int c;
 
         System.Diagnostics.Process ffmpeg = new System.Diagnostics.Process();
         private class ComboBoxItem
@@ -520,6 +521,7 @@ namespace ffmpegUI
                 sSelectedPath = fbd.SelectedPath;
             }
             OutputNameTBX.Text = sSelectedPath;
+            OutputNameTBXMerge.Text = sSelectedPath;
             Properties.Settings.Default.OutputNameTBXPrevious = OutputNameTBX.Text;
             Properties.Settings.Default.Save();
         }
@@ -1371,20 +1373,32 @@ namespace ffmpegUI
             string ffmpegPath = System.IO.Path.Combine(path, "ffmpeg.exe");
 
 
+
+
+
             using (StreamWriter writetext = new StreamWriter(@"" + "CombineList.txt"))
             {
-                writetext.WriteLine(@"file '" + fileCombineTBX1.Text + "'");
-                writetext.WriteLine(@"file '" + fileCombineTBX2.Text + "'");
-                //if (resolutionCB1.Enabled == true)
-                //{
-                //    writetext.WriteLine("Resolution=" + resolutionCB1.Text);
-                //}
-                //else { }
+                if (fileCombineCheckB1.Checked == true)
+                {
+                    writetext.WriteLine(@"file '" + fileCombineTBX1.Text + "'");
+                }
+                if (fileCombineCheckB2.Checked == true)
+                {
+                    writetext.WriteLine(@"file '" + fileCombineTBX2.Text + "'");
+                }
+                if (fileCombineCheckB3.Checked == true)
+                {
+                    writetext.WriteLine(@"file '" + fileCombineTBX3.Text + "'");
+                }
+                if (fileCombineCheckB4.Checked == true)
+                {
+                    writetext.WriteLine(@"file '" + fileCombineTBX4.Text + "'");
+                }
             }
 
 
 
-            string ffmpegParams = "-safe 0 -f concat -i CombineList.txt -c copy output.mp4";
+            string ffmpegParams = "-safe 0 -f concat -i CombineList.txt -c copy " + OutputNameTBXMerge.Text + "\u005c" + FileOutputNameTBXMerge.Text + FileEXTCB1Merge.Text;
             ffmpegCombine.StartInfo.FileName = "cmd.exe";
             ffmpegCombine.StartInfo.Arguments = "/k " + ffmpegPath + " " + ffmpegParams;
             ffmpegCombine.Start();
@@ -1526,6 +1540,118 @@ namespace ffmpegUI
             else if (CustomLineCheckB.Checked == true)
             {
                 CustomLineCB1.Enabled = true;
+            }
+        }
+
+        public void btnAddMoreFiles_Click(object sender, EventArgs e)
+        {
+            TextBox fileCombineTBX = new TextBox();
+            fileCombineTBX.Name = "fileCombineTBX" + c++;
+            fileCombineTBX.Location = new System.Drawing.Point(5, 32 + (20 * c));
+            fileCombineTBX.Size = new System.Drawing.Size(400, 20);//107; 20
+
+            this.tabPage3.Controls.Add(fileCombineTBX);
+            fileCombineTBX1.Text = "fileCombineTBX" + c.ToString();
+            
+
+        }
+
+        private void btnRemoveAddMoreFiles_Click(object sender, EventArgs e)
+        {
+            //fileCombineTBX();
+        }
+
+        private void fileCombineCheckB1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (fileCombineCheckB1.Checked == false)
+            {
+                fileCombineTBX1.Enabled = false;
+            }
+            else if (fileCombineCheckB1.Checked == true)
+            {
+                fileCombineTBX1.Enabled = true;
+            }
+        }
+
+        private void fileCombineCheckB2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (fileCombineCheckB2.Checked == false)
+            {
+                fileCombineTBX2.Enabled = false;
+            }
+            else if (fileCombineCheckB2.Checked == true)
+            {
+                fileCombineTBX2.Enabled = true;
+            }
+        }
+
+        private void fileCombineCheckB3_CheckedChanged(object sender, EventArgs e)
+        {
+            if (fileCombineCheckB3.Checked == false)
+            {
+                fileCombineTBX3.Enabled = false;
+            }
+            else if (fileCombineCheckB3.Checked == true)
+            {
+                fileCombineTBX3.Enabled = true;
+            }
+        }
+
+        private void fileselectCombineBTN3_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialogCombine3 = new OpenFileDialog //Välja input fil
+            {
+                InitialDirectory = @"B:\Videos",
+                Title = "Browse Video Files",
+                CheckFileExists = true,
+                CheckPathExists = true,
+                DefaultExt = "txt",
+                Filter = "Video files (*.*)|*.*",
+                FilterIndex = 2,
+                RestoreDirectory = true,
+
+                ReadOnlyChecked = true,
+                ShowReadOnly = true
+            };
+
+            if (openFileDialogCombine3.ShowDialog() == DialogResult.OK) //Skickar filvägen till input fileTBX rutan
+            {
+                fileCombineTBX3.Text = openFileDialogCombine3.FileName;
+            }
+        }
+
+        private void fileselectCombineBTN4_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialogCombine4 = new OpenFileDialog //Välja input fil
+            {
+                InitialDirectory = @"B:\Videos",
+                Title = "Browse Video Files",
+                CheckFileExists = true,
+                CheckPathExists = true,
+                DefaultExt = "txt",
+                Filter = "Video files (*.*)|*.*",
+                FilterIndex = 2,
+                RestoreDirectory = true,
+
+                ReadOnlyChecked = true,
+                ShowReadOnly = true
+            };
+
+            if (openFileDialogCombine4.ShowDialog() == DialogResult.OK) //Skickar filvägen till input fileTBX rutan
+            {
+                fileCombineTBX4.Text = openFileDialogCombine4.FileName;
+            }
+        }
+
+        private void fileCombineCheckB4_CheckedChanged(object sender, EventArgs e)
+        {
+            if (fileCombineCheckB4.Checked == false)
+            {
+                fileCombineTBX4.Enabled = false;
+            }
+            else if (fileCombineCheckB4.Checked == true)
+            {
+                fileCombineTBX4.Enabled = true;
             }
         }
     }

@@ -42,14 +42,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ffmpegUI.exe" size="184768">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ffmpegUI.exe" size="189888">
       <assemblyIdentity name="ffmpegUI" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>cNKbUvso2Bw63Q5GPH0+h8p8Iu0=</dsig:DigestValue>
+        <dsig:DigestValue>7L73o2zaqhsOWElIeg4fW8iNzkI=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

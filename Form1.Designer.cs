@@ -131,16 +131,32 @@
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.btnDEBUG = new System.Windows.Forms.Button();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.fileCombineCheckB4 = new System.Windows.Forms.CheckBox();
+            this.fileCombineCheckB3 = new System.Windows.Forms.CheckBox();
+            this.fileCombineCheckB2 = new System.Windows.Forms.CheckBox();
+            this.fileCombineCheckB1 = new System.Windows.Forms.CheckBox();
+            this.fileselectCombineBTN4 = new System.Windows.Forms.Button();
+            this.fileselectCombineBTN3 = new System.Windows.Forms.Button();
+            this.fileCombineTBX3 = new System.Windows.Forms.TextBox();
+            this.FileEXTCB1Merge = new System.Windows.Forms.ComboBox();
+            this.OutputNameTBXMerge = new System.Windows.Forms.TextBox();
+            this.DestinationBTNMerge = new System.Windows.Forms.Button();
+            this.FileOutputNameTBXMerge = new System.Windows.Forms.TextBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.btnRemoveAddMoreFiles = new System.Windows.Forms.Button();
+            this.btnAddMoreFiles = new System.Windows.Forms.Button();
             this.fileselectCombineBTN2 = new System.Windows.Forms.Button();
             this.fileselectCombineBTN1 = new System.Windows.Forms.Button();
             this.fileCombineTBX1 = new System.Windows.Forms.TextBox();
             this.fileCombineTBX2 = new System.Windows.Forms.TextBox();
             this.btnCombine = new System.Windows.Forms.Button();
             this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.label14 = new System.Windows.Forms.Label();
-            this.millisecondCheckB = new System.Windows.Forms.CheckBox();
             this.label15 = new System.Windows.Forms.Label();
             this.CMDCheckB = new System.Windows.Forms.CheckBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.millisecondCheckB = new System.Windows.Forms.CheckBox();
+            this.label17 = new System.Windows.Forms.Label();
+            this.fileCombineTBX4 = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -1379,6 +1395,22 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.label17);
+            this.tabPage3.Controls.Add(this.fileCombineCheckB4);
+            this.tabPage3.Controls.Add(this.fileCombineCheckB3);
+            this.tabPage3.Controls.Add(this.fileCombineCheckB2);
+            this.tabPage3.Controls.Add(this.fileCombineCheckB1);
+            this.tabPage3.Controls.Add(this.fileselectCombineBTN4);
+            this.tabPage3.Controls.Add(this.fileselectCombineBTN3);
+            this.tabPage3.Controls.Add(this.fileCombineTBX3);
+            this.tabPage3.Controls.Add(this.fileCombineTBX4);
+            this.tabPage3.Controls.Add(this.FileEXTCB1Merge);
+            this.tabPage3.Controls.Add(this.OutputNameTBXMerge);
+            this.tabPage3.Controls.Add(this.DestinationBTNMerge);
+            this.tabPage3.Controls.Add(this.FileOutputNameTBXMerge);
+            this.tabPage3.Controls.Add(this.label16);
+            this.tabPage3.Controls.Add(this.btnRemoveAddMoreFiles);
+            this.tabPage3.Controls.Add(this.btnAddMoreFiles);
             this.tabPage3.Controls.Add(this.fileselectCombineBTN2);
             this.tabPage3.Controls.Add(this.fileselectCombineBTN1);
             this.tabPage3.Controls.Add(this.fileCombineTBX1);
@@ -1391,9 +1423,152 @@
             this.tabPage3.Text = "Merge Videos";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
+            // fileCombineCheckB4
+            // 
+            this.fileCombineCheckB4.AutoSize = true;
+            this.fileCombineCheckB4.Location = new System.Drawing.Point(10, 97);
+            this.fileCombineCheckB4.Name = "fileCombineCheckB4";
+            this.fileCombineCheckB4.Size = new System.Drawing.Size(15, 14);
+            this.fileCombineCheckB4.TabIndex = 228;
+            this.fileCombineCheckB4.UseVisualStyleBackColor = true;
+            this.fileCombineCheckB4.CheckedChanged += new System.EventHandler(this.fileCombineCheckB4_CheckedChanged);
+            // 
+            // fileCombineCheckB3
+            // 
+            this.fileCombineCheckB3.AutoSize = true;
+            this.fileCombineCheckB3.Location = new System.Drawing.Point(10, 77);
+            this.fileCombineCheckB3.Name = "fileCombineCheckB3";
+            this.fileCombineCheckB3.Size = new System.Drawing.Size(15, 14);
+            this.fileCombineCheckB3.TabIndex = 227;
+            this.fileCombineCheckB3.UseVisualStyleBackColor = true;
+            this.fileCombineCheckB3.CheckedChanged += new System.EventHandler(this.fileCombineCheckB3_CheckedChanged);
+            // 
+            // fileCombineCheckB2
+            // 
+            this.fileCombineCheckB2.AutoSize = true;
+            this.fileCombineCheckB2.Location = new System.Drawing.Point(10, 57);
+            this.fileCombineCheckB2.Name = "fileCombineCheckB2";
+            this.fileCombineCheckB2.Size = new System.Drawing.Size(15, 14);
+            this.fileCombineCheckB2.TabIndex = 226;
+            this.fileCombineCheckB2.UseVisualStyleBackColor = true;
+            this.fileCombineCheckB2.CheckedChanged += new System.EventHandler(this.fileCombineCheckB2_CheckedChanged);
+            // 
+            // fileCombineCheckB1
+            // 
+            this.fileCombineCheckB1.AutoSize = true;
+            this.fileCombineCheckB1.Location = new System.Drawing.Point(10, 37);
+            this.fileCombineCheckB1.Name = "fileCombineCheckB1";
+            this.fileCombineCheckB1.Size = new System.Drawing.Size(15, 14);
+            this.fileCombineCheckB1.TabIndex = 225;
+            this.fileCombineCheckB1.UseVisualStyleBackColor = true;
+            this.fileCombineCheckB1.CheckedChanged += new System.EventHandler(this.fileCombineCheckB1_CheckedChanged);
+            // 
+            // fileselectCombineBTN4
+            // 
+            this.fileselectCombineBTN4.Location = new System.Drawing.Point(437, 94);
+            this.fileselectCombineBTN4.Name = "fileselectCombineBTN4";
+            this.fileselectCombineBTN4.Size = new System.Drawing.Size(16, 18);
+            this.fileselectCombineBTN4.TabIndex = 220;
+            this.fileselectCombineBTN4.UseVisualStyleBackColor = true;
+            this.fileselectCombineBTN4.Click += new System.EventHandler(this.fileselectCombineBTN4_Click);
+            // 
+            // fileselectCombineBTN3
+            // 
+            this.fileselectCombineBTN3.Location = new System.Drawing.Point(437, 76);
+            this.fileselectCombineBTN3.Name = "fileselectCombineBTN3";
+            this.fileselectCombineBTN3.Size = new System.Drawing.Size(16, 18);
+            this.fileselectCombineBTN3.TabIndex = 219;
+            this.fileselectCombineBTN3.UseVisualStyleBackColor = true;
+            this.fileselectCombineBTN3.Click += new System.EventHandler(this.fileselectCombineBTN3_Click);
+            // 
+            // fileCombineTBX3
+            // 
+            this.fileCombineTBX3.AllowDrop = true;
+            this.fileCombineTBX3.Enabled = false;
+            this.fileCombineTBX3.Location = new System.Drawing.Point(31, 74);
+            this.fileCombineTBX3.Name = "fileCombineTBX3";
+            this.fileCombineTBX3.Size = new System.Drawing.Size(400, 20);
+            this.fileCombineTBX3.TabIndex = 218;
+            this.fileCombineTBX3.Text = "C:\\";
+            // 
+            // FileEXTCB1Merge
+            // 
+            this.FileEXTCB1Merge.FormattingEnabled = true;
+            this.FileEXTCB1Merge.Items.AddRange(new object[] {
+            ".mp4",
+            ".mp3",
+            ".mov",
+            ".wmv",
+            ".flv",
+            ".avi",
+            ".avchd",
+            ".webm",
+            ".mkv"});
+            this.FileEXTCB1Merge.Location = new System.Drawing.Point(505, 434);
+            this.FileEXTCB1Merge.Name = "FileEXTCB1Merge";
+            this.FileEXTCB1Merge.Size = new System.Drawing.Size(70, 21);
+            this.FileEXTCB1Merge.TabIndex = 216;
+            this.FileEXTCB1Merge.Text = ".mp4";
+            // 
+            // OutputNameTBXMerge
+            // 
+            this.OutputNameTBXMerge.Location = new System.Drawing.Point(20, 407);
+            this.OutputNameTBXMerge.Name = "OutputNameTBXMerge";
+            this.OutputNameTBXMerge.Size = new System.Drawing.Size(433, 20);
+            this.OutputNameTBXMerge.TabIndex = 211;
+            this.OutputNameTBXMerge.Text = "C:\\";
+            // 
+            // DestinationBTNMerge
+            // 
+            this.DestinationBTNMerge.Location = new System.Drawing.Point(459, 407);
+            this.DestinationBTNMerge.Name = "DestinationBTNMerge";
+            this.DestinationBTNMerge.Size = new System.Drawing.Size(116, 20);
+            this.DestinationBTNMerge.TabIndex = 212;
+            this.DestinationBTNMerge.Text = "Save location";
+            this.DestinationBTNMerge.UseVisualStyleBackColor = true;
+            this.DestinationBTNMerge.Click += new System.EventHandler(this.DestinationBTN_Click);
+            // 
+            // FileOutputNameTBXMerge
+            // 
+            this.FileOutputNameTBXMerge.Location = new System.Drawing.Point(86, 433);
+            this.FileOutputNameTBXMerge.Name = "FileOutputNameTBXMerge";
+            this.FileOutputNameTBXMerge.Size = new System.Drawing.Size(413, 20);
+            this.FileOutputNameTBXMerge.TabIndex = 213;
+            this.FileOutputNameTBXMerge.Text = "Export";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label16.Location = new System.Drawing.Point(17, 434);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(67, 16);
+            this.label16.TabIndex = 215;
+            this.label16.Text = "File name";
+            // 
+            // btnRemoveAddMoreFiles
+            // 
+            this.btnRemoveAddMoreFiles.Location = new System.Drawing.Point(571, 32);
+            this.btnRemoveAddMoreFiles.Name = "btnRemoveAddMoreFiles";
+            this.btnRemoveAddMoreFiles.Size = new System.Drawing.Size(16, 18);
+            this.btnRemoveAddMoreFiles.TabIndex = 210;
+            this.btnRemoveAddMoreFiles.Text = "-";
+            this.btnRemoveAddMoreFiles.UseVisualStyleBackColor = true;
+            this.btnRemoveAddMoreFiles.Click += new System.EventHandler(this.btnRemoveAddMoreFiles_Click);
+            // 
+            // btnAddMoreFiles
+            // 
+            this.btnAddMoreFiles.Location = new System.Drawing.Point(571, 8);
+            this.btnAddMoreFiles.Name = "btnAddMoreFiles";
+            this.btnAddMoreFiles.Size = new System.Drawing.Size(16, 18);
+            this.btnAddMoreFiles.TabIndex = 209;
+            this.btnAddMoreFiles.Text = "+";
+            this.btnAddMoreFiles.UseVisualStyleBackColor = true;
+            this.btnAddMoreFiles.Click += new System.EventHandler(this.btnAddMoreFiles_Click);
+            // 
             // fileselectCombineBTN2
             // 
-            this.fileselectCombineBTN2.Location = new System.Drawing.Point(112, 32);
+            this.fileselectCombineBTN2.Location = new System.Drawing.Point(437, 54);
             this.fileselectCombineBTN2.Name = "fileselectCombineBTN2";
             this.fileselectCombineBTN2.Size = new System.Drawing.Size(16, 18);
             this.fileselectCombineBTN2.TabIndex = 208;
@@ -1402,7 +1577,7 @@
             // 
             // fileselectCombineBTN1
             // 
-            this.fileselectCombineBTN1.Location = new System.Drawing.Point(112, 12);
+            this.fileselectCombineBTN1.Location = new System.Drawing.Point(437, 34);
             this.fileselectCombineBTN1.Name = "fileselectCombineBTN1";
             this.fileselectCombineBTN1.Size = new System.Drawing.Size(16, 18);
             this.fileselectCombineBTN1.TabIndex = 207;
@@ -1412,30 +1587,32 @@
             // fileCombineTBX1
             // 
             this.fileCombineTBX1.AllowDrop = true;
-            this.fileCombineTBX1.Location = new System.Drawing.Point(5, 12);
+            this.fileCombineTBX1.Enabled = false;
+            this.fileCombineTBX1.Location = new System.Drawing.Point(31, 34);
             this.fileCombineTBX1.Name = "fileCombineTBX1";
-            this.fileCombineTBX1.Size = new System.Drawing.Size(107, 20);
+            this.fileCombineTBX1.Size = new System.Drawing.Size(400, 20);
             this.fileCombineTBX1.TabIndex = 206;
             this.fileCombineTBX1.Text = "C:\\";
             // 
             // fileCombineTBX2
             // 
             this.fileCombineTBX2.AllowDrop = true;
-            this.fileCombineTBX2.Location = new System.Drawing.Point(5, 32);
+            this.fileCombineTBX2.Enabled = false;
+            this.fileCombineTBX2.Location = new System.Drawing.Point(31, 54);
             this.fileCombineTBX2.Name = "fileCombineTBX2";
-            this.fileCombineTBX2.Size = new System.Drawing.Size(107, 20);
+            this.fileCombineTBX2.Size = new System.Drawing.Size(400, 20);
             this.fileCombineTBX2.TabIndex = 205;
             this.fileCombineTBX2.Text = "C:\\";
             // 
             // btnCombine
             // 
             this.btnCombine.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCombine.Location = new System.Drawing.Point(127, 12);
+            this.btnCombine.Location = new System.Drawing.Point(126, 462);
             this.btnCombine.Margin = new System.Windows.Forms.Padding(2);
             this.btnCombine.Name = "btnCombine";
-            this.btnCombine.Size = new System.Drawing.Size(65, 37);
+            this.btnCombine.Size = new System.Drawing.Size(351, 41);
             this.btnCombine.TabIndex = 204;
-            this.btnCombine.Text = "Combine Video";
+            this.btnCombine.Text = "Merge Videos";
             this.btnCombine.UseVisualStyleBackColor = true;
             this.btnCombine.Click += new System.EventHandler(this.btnCombine_Click);
             // 
@@ -1452,6 +1629,24 @@
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Settings";
             this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(21, 57);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(136, 13);
+            this.label15.TabIndex = 199;
+            this.label15.Text = "Show CMD when exporting";
+            // 
+            // CMDCheckB
+            // 
+            this.CMDCheckB.AutoSize = true;
+            this.CMDCheckB.Location = new System.Drawing.Point(8, 58);
+            this.CMDCheckB.Name = "CMDCheckB";
+            this.CMDCheckB.Size = new System.Drawing.Size(15, 14);
+            this.CMDCheckB.TabIndex = 198;
+            this.CMDCheckB.UseVisualStyleBackColor = true;
             // 
             // label14
             // 
@@ -1471,23 +1666,26 @@
             this.millisecondCheckB.TabIndex = 196;
             this.millisecondCheckB.UseVisualStyleBackColor = true;
             // 
-            // label15
+            // label17
             // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(21, 57);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(136, 13);
-            this.label15.TabIndex = 199;
-            this.label15.Text = "Show CMD when exporting";
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label17.ForeColor = System.Drawing.Color.Red;
+            this.label17.Location = new System.Drawing.Point(223, 13);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(135, 13);
+            this.label17.TabIndex = 231;
+            this.label17.Text = "Only for use with .MP4";
             // 
-            // CMDCheckB
+            // fileCombineTBX4
             // 
-            this.CMDCheckB.AutoSize = true;
-            this.CMDCheckB.Location = new System.Drawing.Point(8, 58);
-            this.CMDCheckB.Name = "CMDCheckB";
-            this.CMDCheckB.Size = new System.Drawing.Size(15, 14);
-            this.CMDCheckB.TabIndex = 198;
-            this.CMDCheckB.UseVisualStyleBackColor = true;
+            this.fileCombineTBX4.AllowDrop = true;
+            this.fileCombineTBX4.Enabled = false;
+            this.fileCombineTBX4.Location = new System.Drawing.Point(31, 94);
+            this.fileCombineTBX4.Name = "fileCombineTBX4";
+            this.fileCombineTBX4.Size = new System.Drawing.Size(400, 20);
+            this.fileCombineTBX4.TabIndex = 217;
+            this.fileCombineTBX4.Text = "C:\\";
             // 
             // Form1
             // 
@@ -1624,6 +1822,22 @@
         private System.Windows.Forms.CheckBox millisecondCheckB;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.CheckBox CMDCheckB;
+        private System.Windows.Forms.Button btnAddMoreFiles;
+        private System.Windows.Forms.Button btnRemoveAddMoreFiles;
+        private System.Windows.Forms.TextBox OutputNameTBXMerge;
+        private System.Windows.Forms.Button DestinationBTNMerge;
+        private System.Windows.Forms.TextBox FileOutputNameTBXMerge;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.ComboBox FileEXTCB1Merge;
+        private System.Windows.Forms.CheckBox fileCombineCheckB4;
+        private System.Windows.Forms.CheckBox fileCombineCheckB3;
+        private System.Windows.Forms.CheckBox fileCombineCheckB2;
+        private System.Windows.Forms.CheckBox fileCombineCheckB1;
+        private System.Windows.Forms.Button fileselectCombineBTN4;
+        private System.Windows.Forms.Button fileselectCombineBTN3;
+        private System.Windows.Forms.TextBox fileCombineTBX3;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.TextBox fileCombineTBX4;
     }
 }
 
