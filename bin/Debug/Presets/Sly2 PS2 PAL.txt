@@ -1,0 +1,12 @@
+FFMPEG UI PRESET CONFIG:
+Resolution=960x720
+Deinterlace=yadif=1
+CRF=14
+VideoEncoder=libx264
+SpeedPreset=ultrafast
+Profile=high
+Level=4.2
+CropXSize=682
+CropYSize=512
+CropXLocation=47
+CropYLocation=27

@@ -1,0 +1,11 @@
+FFMPEG UI PRESET CONFIG:
+Resolution=960x720
+AspectRatio=4:3
+MInterpolate=60
+CRF=10
+VideoEncoder=libx264
+SpeedPreset=ultrafast
+CropXSize=640
+CropYSize=450
+CropXLocation=1000
+CropYLocation=1000
