@@ -1,0 +1,13 @@
+C:\Users\Henry\Documents\GitHub\FFmpegUI\bin\Debug\Henry's Video Toolbox.exe.config
+C:\Users\Henry\Documents\GitHub\FFmpegUI\bin\Debug\Henry's Video Toolbox.exe.manifest
+C:\Users\Henry\Documents\GitHub\FFmpegUI\bin\Debug\Henry's Video Toolbox.application
+C:\Users\Henry\Documents\GitHub\FFmpegUI\bin\Debug\Henry's Video Toolbox.exe
+C:\Users\Henry\Documents\GitHub\FFmpegUI\bin\Debug\Henry's Video Toolbox.pdb
+C:\Users\Henry\Documents\GitHub\FFmpegUI\obj\Debug\ffmpegUI.Form1.resources
+C:\Users\Henry\Documents\GitHub\FFmpegUI\obj\Debug\ffmpegUI.Properties.Resources.resources
+C:\Users\Henry\Documents\GitHub\FFmpegUI\obj\Debug\Henry's Video Toolbox.csproj.GenerateResource.cache
+C:\Users\Henry\Documents\GitHub\FFmpegUI\obj\Debug\Henry's Video Toolbox.csproj.CoreCompileInputs.cache
+C:\Users\Henry\Documents\GitHub\FFmpegUI\obj\Debug\Henry's Video Toolbox.exe.manifest
+C:\Users\Henry\Documents\GitHub\FFmpegUI\obj\Debug\Henry's Video Toolbox.application
+C:\Users\Henry\Documents\GitHub\FFmpegUI\obj\Debug\Henry's Video Toolbox.exe
+C:\Users\Henry\Documents\GitHub\FFmpegUI\obj\Debug\Henry's Video Toolbox.pdb

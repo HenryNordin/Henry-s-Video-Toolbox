@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31424.327
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Henry's Video Toolbox", "Henry's Video Toolbox.csproj", "{F486BD52-FB2E-4747-83E9-77A7D4E52930}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F486BD52-FB2E-4747-83E9-77A7D4E52930}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F486BD52-FB2E-4747-83E9-77A7D4E52930}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F486BD52-FB2E-4747-83E9-77A7D4E52930}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F486BD52-FB2E-4747-83E9-77A7D4E52930}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B98FE60F-FD5A-4C72-BFF5-02CC1650313C}
+	EndGlobalSection
+EndGlobal

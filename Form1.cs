@@ -1018,9 +1018,9 @@ namespace ffmpegUI
                 VideoBitrate = "";
             }
             string CustomLine = string.Empty;
-            if (CustomLineCB1.Enabled == true)
+            if (CustomLineTBX.Enabled == true)
             {
-                CustomLine = CustomLineCB1.Text;
+                CustomLine = CustomLineTBX.Text;
             }
             else
             {
@@ -1047,7 +1047,6 @@ namespace ffmpegUI
                 ffmpeg.StartInfo.RedirectStandardError = true; //true
                 ffmpeg.StartInfo.RedirectStandardInput = true; //true
                 ffmpeg.Start();
-
                 Console.SetIn(ffmpeg.StandardError);
                 Action _loop = () =>
                 {
@@ -1069,8 +1068,12 @@ namespace ffmpegUI
                 ffmpeg.StartInfo.RedirectStandardError = false; //true
                 ffmpeg.StartInfo.RedirectStandardInput = false; //true
                 ffmpeg.Start();
-            }
-            
+                ffmpeg.WaitForExit();
+                if (ffmpeg.ExitCode == 0)
+                {
+                    MessageBox.Show("lol");
+                }
+            }                  
         }
 
         private void UpdateProgress(string _line)
@@ -1096,7 +1099,7 @@ namespace ffmpegUI
 
                 if (outputFFMPEG == null)
                 {
-
+                    
                 }
                 else
                 {
@@ -1535,30 +1538,12 @@ namespace ffmpegUI
         {
             if (CustomLineCheckB.Checked == false)
             {
-                CustomLineCB1.Enabled = false;
+                CustomLineTBX.Enabled = false;
             }
             else if (CustomLineCheckB.Checked == true)
             {
-                CustomLineCB1.Enabled = true;
+                CustomLineTBX.Enabled = true;
             }
-        }
-
-        public void btnAddMoreFiles_Click(object sender, EventArgs e)
-        {
-            TextBox fileCombineTBX = new TextBox();
-            fileCombineTBX.Name = "fileCombineTBX" + c++;
-            fileCombineTBX.Location = new System.Drawing.Point(5, 32 + (20 * c));
-            fileCombineTBX.Size = new System.Drawing.Size(400, 20);//107; 20
-
-            this.tabPage3.Controls.Add(fileCombineTBX);
-            fileCombineTBX1.Text = "fileCombineTBX" + c.ToString();
-            
-
-        }
-
-        private void btnRemoveAddMoreFiles_Click(object sender, EventArgs e)
-        {
-            //fileCombineTBX();
         }
 
         private void fileCombineCheckB1_CheckedChanged(object sender, EventArgs e)
@@ -1653,6 +1638,33 @@ namespace ffmpegUI
             {
                 fileCombineTBX4.Enabled = true;
             }
+        }
+
+        private void btnDownloadRUN_Click(object sender, EventArgs e)
+        {
+            String OnlyAudio;
+            if (OnlyAudioCheckB.Checked == true)
+            {
+                OnlyAudio = "--extract-audio ";
+            }
+            else
+            {
+                OnlyAudio = "";
+            }
+
+
+            string path = @""; //Starta i program mappen
+            System.Diagnostics.Process youtubedl = new System.Diagnostics.Process();
+            string youtubedlPath = System.IO.Path.Combine(path, "yt-dlp.exe");
+            string OutputPath = "-o \u0022" + DownloadTBX.Text + "%(title)s-%(id)s.%(ext)s" + "\u0022 ";
+            string QualityYT = "-f " + qualityCB1.Text + " "; // --extract-audio --yes-playlist
+            string youtubedlParams = OutputPath + " -i " + QualityYT + OnlyAudio + " -v " + URLTBX.Text;
+            youtubedl.StartInfo.FileName = "cmd.exe"; //Väljer Kommandotolken som ska startas
+            youtubedl.StartInfo.Arguments = "/k " + youtubedlPath + " " + youtubedlParams; //Start argument
+            youtubedl.StartInfo.UseShellExecute = false;
+            youtubedl.StartInfo.CreateNoWindow = false;
+            youtubedl.StartInfo.RedirectStandardOutput = false;
+            youtubedl.Start();
         }
     }
 }

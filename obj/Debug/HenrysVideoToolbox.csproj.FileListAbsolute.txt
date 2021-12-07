@@ -1,0 +1,5 @@
+C:\Users\Henry\Documents\GitHub\FFmpegUI\obj\Debug\HenrysVideoToolbox.csproj.AssemblyReference.cache
+C:\Users\Henry\Documents\GitHub\FFmpegUI\obj\Debug\ffmpegUI.Form1.resources
+C:\Users\Henry\Documents\GitHub\FFmpegUI\obj\Debug\HenrysVideoToolbox.Properties.Resources.resources
+C:\Users\Henry\Documents\GitHub\FFmpegUI\obj\Debug\HenrysVideoToolbox.csproj.GenerateResource.cache
+C:\Users\Henry\Documents\GitHub\FFmpegUI\obj\Debug\HenrysVideoToolbox.csproj.CoreCompileInputs.cache
