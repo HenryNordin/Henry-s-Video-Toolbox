@@ -11,3 +11,31 @@ C:\Users\Henry\Documents\GitHub\FFmpegUI\obj\Debug\Henry's Video Toolbox.exe.man
 C:\Users\Henry\Documents\GitHub\FFmpegUI\obj\Debug\Henry's Video Toolbox.application
 C:\Users\Henry\Documents\GitHub\FFmpegUI\obj\Debug\Henry's Video Toolbox.exe
 C:\Users\Henry\Documents\GitHub\FFmpegUI\obj\Debug\Henry's Video Toolbox.pdb
+C:\Users\Henry\Documents\GitHub\Henry-s-Video-Toolbox\bin\Debug\Henry's Video Toolbox.exe.config
+C:\Users\Henry\Documents\GitHub\Henry-s-Video-Toolbox\bin\Debug\Henry's Video Toolbox.exe.manifest
+C:\Users\Henry\Documents\GitHub\Henry-s-Video-Toolbox\bin\Debug\Henry's Video Toolbox.application
+C:\Users\Henry\Documents\GitHub\Henry-s-Video-Toolbox\bin\Debug\Henry's Video Toolbox.exe
+C:\Users\Henry\Documents\GitHub\Henry-s-Video-Toolbox\bin\Debug\Henry's Video Toolbox.pdb
+C:\Users\Henry\Documents\GitHub\Henry-s-Video-Toolbox\obj\Debug\Henry's Video Toolbox.csproj.AssemblyReference.cache
+C:\Users\Henry\Documents\GitHub\Henry-s-Video-Toolbox\obj\Debug\ffmpegUI.Form1.resources
+C:\Users\Henry\Documents\GitHub\Henry-s-Video-Toolbox\obj\Debug\ffmpegUI.Properties.Resources.resources
+C:\Users\Henry\Documents\GitHub\Henry-s-Video-Toolbox\obj\Debug\Henry's Video Toolbox.csproj.GenerateResource.cache
+C:\Users\Henry\Documents\GitHub\Henry-s-Video-Toolbox\obj\Debug\Henry's Video Toolbox.csproj.CoreCompileInputs.cache
+C:\Users\Henry\Documents\GitHub\Henry-s-Video-Toolbox\obj\Debug\Henry's Video Toolbox.exe.manifest
+C:\Users\Henry\Documents\GitHub\Henry-s-Video-Toolbox\obj\Debug\Henry's Video Toolbox.application
+C:\Users\Henry\Documents\GitHub\Henry-s-Video-Toolbox\obj\Debug\Henry's Video Toolbox.exe
+C:\Users\Henry\Documents\GitHub\Henry-s-Video-Toolbox\obj\Debug\Henry's Video Toolbox.pdb
+C:\Users\henry\OneDrive\Dokument\GitHub\Henry-s-Video-Toolbox\obj\Debug\Henry's Video Toolbox.csproj.AssemblyReference.cache
+C:\Users\henry\OneDrive\Dokument\GitHub\Henry-s-Video-Toolbox\obj\Debug\ffmpegUI.Form1.resources
+C:\Users\henry\OneDrive\Dokument\GitHub\Henry-s-Video-Toolbox\obj\Debug\ffmpegUI.Properties.Resources.resources
+C:\Users\henry\OneDrive\Dokument\GitHub\Henry-s-Video-Toolbox\obj\Debug\Henry's Video Toolbox.csproj.GenerateResource.cache
+C:\Users\henry\OneDrive\Dokument\GitHub\Henry-s-Video-Toolbox\obj\Debug\Henry's Video Toolbox.exe
+C:\Users\henry\OneDrive\Dokument\GitHub\Henry-s-Video-Toolbox\obj\Debug\Henry's Video Toolbox.pdb
+C:\Users\henry\OneDrive\Dokument\GitHub\Henry-s-Video-Toolbox\obj\Debug\Henry's Video Toolbox.csproj.CoreCompileInputs.cache
+C:\Users\henry\OneDrive\Dokument\GitHub\Henry-s-Video-Toolbox\bin\Debug\Henry's Video Toolbox.exe.config
+C:\Users\henry\OneDrive\Dokument\GitHub\Henry-s-Video-Toolbox\bin\Debug\Henry's Video Toolbox.exe.manifest
+C:\Users\henry\OneDrive\Dokument\GitHub\Henry-s-Video-Toolbox\bin\Debug\Henry's Video Toolbox.application
+C:\Users\henry\OneDrive\Dokument\GitHub\Henry-s-Video-Toolbox\bin\Debug\Henry's Video Toolbox.exe
+C:\Users\henry\OneDrive\Dokument\GitHub\Henry-s-Video-Toolbox\bin\Debug\Henry's Video Toolbox.pdb
+C:\Users\henry\OneDrive\Dokument\GitHub\Henry-s-Video-Toolbox\obj\Debug\Henry's Video Toolbox.exe.manifest
+C:\Users\henry\OneDrive\Dokument\GitHub\Henry-s-Video-Toolbox\obj\Debug\Henry's Video Toolbox.application

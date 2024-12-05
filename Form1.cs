@@ -370,6 +370,27 @@ namespace ffmpegUI
             };
             fileTBX.Text = Properties.Settings.Default.fileTBXPrevious;
             OutputNameTBX.Text = Properties.Settings.Default.OutputNameTBXPrevious;
+           
+
+
+            string directoryPath = AppDomain.CurrentDomain.BaseDirectory;
+            string programName = "ffmpeg.exe";
+            string filePath = Path.Combine(directoryPath, programName);
+
+
+            if (!File.Exists(filePath))
+            {
+                string message = "Can't seem to find ffmpeg.exe in: \r\n" + directoryPath + "" + "\r\n\r\nAs it is needed, nothing will work without it!\r\nIf you just want to take a " +
+                    "look at Henry's Video Toolbox you can press 'No' and do so without it :)\r\n\r\nDo you want to download it?";
+                string title = "FFMPEG is MISSING!";
+                MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+                DialogResult result = MessageBox.Show(message, title, buttons, MessageBoxIcon.Warning);
+                if (result == DialogResult.Yes)
+                {
+                    ProcessStartInfo sInfo = new ProcessStartInfo("https://github.com/BtbN/FFmpeg-Builds/releases");
+                    Process.Start(sInfo);
+                }
+            }
 
         }
 
@@ -832,6 +853,15 @@ namespace ffmpegUI
             {
                 AspectRatio = "";
             }
+            string ColorFix = string.Empty; 
+            if (ColorFixCheckB.Checked == true)
+            {
+                ColorFix = "-color_trc smpte2084 -color_primaries bt2020 ";
+            }
+            else
+            {
+                ColorFix = "";
+            }
 
             string vf = string.Empty; //Samma som tidigare
             if ((resolutionCB1.Enabled || deinterlaceCB1.Enabled || CropCheckB.Checked || FinterpolateCB1.Enabled || ReduceNoiseCB1.Enabled == true))
@@ -1039,7 +1069,7 @@ namespace ffmpegUI
             //",hqdn3d=4.0:3.0:6.0:4.5 "
             string path = @""; //Starta i program mappen
             ffmpeg.StartInfo.FileName = path + "ffmpeg.exe";
-            ffmpeg.StartInfo.Arguments = string.Format(@"-i " + "\u0022" + @fileTBX.Text + "\u0022 " + AspectRatio + vf + Deinterlace + CropNPos + Resolution + ReduceNoise + Finterpolate + VideoCut + " " + Vcodec + Preset + Profile + Level + crf + Maxrate + Bufsize + FPS + AudioBitrate + VideoBitrate + CustomLine + " -movflags +faststart " + CopyNoEncode + AskOverWrite + "\u0022" + ExportName + "\u0022 ");
+            ffmpeg.StartInfo.Arguments = string.Format(@"-i " + "\u0022" + @fileTBX.Text + "\u0022 " + AspectRatio + vf + Deinterlace + CropNPos + Resolution + ReduceNoise + Finterpolate + VideoCut + " " + Vcodec + Preset + Profile + Level + crf + Maxrate + Bufsize + FPS + AudioBitrate + VideoBitrate + CustomLine + ColorFix + " -movflags +faststart " + CopyNoEncode + AskOverWrite + "\u0022" + ExportName + "\u0022 ");
             if (CMDCheckB.Checked == false)
             {
                 ffmpeg.StartInfo.UseShellExecute = false; //false
@@ -1642,6 +1672,25 @@ namespace ffmpegUI
 
         private void btnDownloadRUN_Click(object sender, EventArgs e)
         {
+            string directoryPath = AppDomain.CurrentDomain.BaseDirectory;
+            string programName = "yt-dlp.exe";
+            string filePath = Path.Combine(directoryPath, programName);
+
+
+            if (!File.Exists(filePath))
+            {
+                string message = "Can't seem to find yt-dlp.exe in: \r\n" + directoryPath + "" + "\r\n\r\nAs it is needed to download youtube videos you'd have to download it first!" +
+                    " \r\n\r\nDo you want to download it?";
+                string title = programName + " is MISSING!";
+                MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+                DialogResult result = MessageBox.Show(message, title, buttons, MessageBoxIcon.Warning);
+                if (result == DialogResult.Yes)
+                {
+                    ProcessStartInfo sInfo = new ProcessStartInfo("https://github.com/yt-dlp/yt-dlp/releases/");
+                    Process.Start(sInfo);
+                }
+                return;
+            }
             String OnlyAudio;
             if (OnlyAudioCheckB.Checked == true)
             {
@@ -1651,20 +1700,42 @@ namespace ffmpegUI
             {
                 OnlyAudio = "";
             }
-
+            String PlaylistActivate;
+            if (PlaylistActivateCheckB.Checked == true)
+            {
+                PlaylistActivate = "--yes-playlist ";
+            }
+            else
+            {
+                PlaylistActivate = "";
+            }
+            string CustomLines = ytdlpTBX.Text;
 
             string path = @""; //Starta i program mappen
             System.Diagnostics.Process youtubedl = new System.Diagnostics.Process();
             string youtubedlPath = System.IO.Path.Combine(path, "yt-dlp.exe");
             string OutputPath = "-o \u0022" + DownloadTBX.Text + "%(title)s-%(id)s.%(ext)s" + "\u0022 ";
-            string QualityYT = "-f " + qualityCB1.Text + " "; // --extract-audio --yes-playlist
-            string youtubedlParams = OutputPath + " -i " + QualityYT + OnlyAudio + " -v " + URLTBX.Text;
+            string QualityYT = "-f \u0022" + qualityCB1.Text + "\u0022 "; 
+            string DownloadRes = "-S \u0022res:" + VideoHeightCB.Text + "\u0022 ";
+            string youtubedlParams = OutputPath + " -i " + DownloadRes + OnlyAudio + PlaylistActivate + CustomLines + " -v " + URLTBX.Text;
             youtubedl.StartInfo.FileName = "cmd.exe"; //Väljer Kommandotolken som ska startas
             youtubedl.StartInfo.Arguments = "/k " + youtubedlPath + " " + youtubedlParams; //Start argument
             youtubedl.StartInfo.UseShellExecute = false;
             youtubedl.StartInfo.CreateNoWindow = false;
             youtubedl.StartInfo.RedirectStandardOutput = false;
             youtubedl.Start();
+        }
+
+        private void DownloadDestinationBTN_Click(object sender, EventArgs e)
+        {
+            FolderBrowserDialog fbd = new FolderBrowserDialog();    //Väljer vart videon ska sparas efter export
+            fbd.Description = "Custom Description";
+            string sSelectedPath = string.Empty;
+            if (fbd.ShowDialog() == DialogResult.OK)
+            {
+                sSelectedPath = fbd.SelectedPath + "\\";
+            }
+            DownloadTBX.Text = sSelectedPath;
         }
     }
 }

@@ -42,24 +42,24 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Henry's Video Toolbox.exe" size="200128">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Henry's Video Toolbox.exe" size="203712">
       <assemblyIdentity name="Henry's Video Toolbox" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
-        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>fdUmEUUsR4HrlOfLVJ2MAsPj+5I=</dsig:DigestValue>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>lO4xwqSTrjGHyZ9va2dTeucoJMe89MSHIB6om2dYVeg=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
-  <file name="Henry's Video Toolbox.exe.config" size="1565">
+  <file name="Henry's Video Toolbox.exe.config" size="1647">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
-      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-      <dsig:DigestValue>3mH7wInjt8/v/DbsqKM/1RcTmG4=</dsig:DigestValue>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>vrs+OdHfwEws3cruWD9um+uSTh9hmggTHQPGKi+eIjc=</dsig:DigestValue>
     </hash>
   </file>
 </asmv1:assembly>

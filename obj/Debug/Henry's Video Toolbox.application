@@ -4,17 +4,17 @@
   <description asmv2:publisher="Henry's Video Toolbox" asmv2:product="Henry's Video Toolbox" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <deployment install="true" mapFileExtensions="true" />
   <compatibleFrameworks xmlns="urn:schemas-microsoft-com:clickonce.v2">
-    <framework targetVersion="4.0" profile="Full" supportedRuntime="4.0.30319" />
+    <framework targetVersion="4.8" profile="Full" supportedRuntime="4.0.30319" />
   </compatibleFrameworks>
   <dependency>
-    <dependentAssembly dependencyType="install" codebase="Henry's Video Toolbox.exe.manifest" size="3500">
+    <dependentAssembly dependencyType="install" codebase="Henry's Video Toolbox.exe.manifest" size="3536">
       <assemblyIdentity name="Henry's Video Toolbox.exe" version="1.0.0.2" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
-        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>gpx5YYZ9aD7x3xXon9kGiEbQfbo=</dsig:DigestValue>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>U8X7QHK32jAgIjnEUw0LiWzaQk896fQ6N4iAAJA0Cjc=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
