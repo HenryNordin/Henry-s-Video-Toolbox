@@ -1,3 +1,0 @@
-FFMPEG UI PRESET CONFIG:
-VideoEncoder=libx264
-SpeedPreset=ultrafast

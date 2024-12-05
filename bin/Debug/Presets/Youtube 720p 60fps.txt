@@ -1,9 +1,0 @@
-FFMPEG UI PRESET CONFIG:
-Resolution=1280x720
-AspectRatio=16:9
-FPS=60
-VideoEncoder=libx264
-VideoBitrate=9,5
-SpeedPreset=superfast
-Profile=high
-Level=4.2

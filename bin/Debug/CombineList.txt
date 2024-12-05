@@ -1,4 +1,0 @@
-file 'C:\Users\Henry\Desktop\DAI.mp4'
-file 'C:\Users\Henry\Desktop\DAO.mp4'
-file 'C:\Users\Henry\Desktop\morrowind.mp4'
-file 'C:\Users\Henry\Desktop\SlyGameplay1080P.mp4'

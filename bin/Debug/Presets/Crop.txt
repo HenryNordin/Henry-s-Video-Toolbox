@@ -1,9 +1,0 @@
-FFMPEG UI PRESET CONFIG:
-Resolution=1920x1080
-FPS=25
-VideoEncoder=libx264
-SpeedPreset=ultrafast
-CropXSize=500
-CropYSize=500
-CropXLocation=50
-CropYLocation=50
